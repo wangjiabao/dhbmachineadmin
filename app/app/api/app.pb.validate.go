@@ -5540,6 +5540,8 @@ func (m *MyAuthListReply) validate(all bool) error {
 
 	}
 
+	// no validation rules for Super
+
 	if len(errors) > 0 {
 		return MyAuthListReplyMultiError(errors)
 	}

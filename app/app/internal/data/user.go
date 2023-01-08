@@ -574,7 +574,7 @@ func (u *UserRepo) CreateAdminAuth(ctx context.Context, adminId int64, authId in
 	var adminAuth AdminAuth
 	adminAuth.AdminId = adminId
 	adminAuth.AuthId = authId
-	res := u.data.DB(ctx).Table("admin").Create(&adminAuth)
+	res := u.data.DB(ctx).Table("admin_auth").Create(&adminAuth)
 	if res.Error != nil {
 		return false, errors.New(500, "CREATE_ADMIN_ERROR", "记录创建失败")
 	}
@@ -587,7 +587,7 @@ func (u *UserRepo) DeleteAdminAuth(ctx context.Context, adminId int64, authId in
 	var adminAuth AdminAuth
 	adminAuth.AdminId = adminId
 	adminAuth.AuthId = authId
-	res := u.data.DB(ctx).Table("admin").Where("admin_id=? and auth_id=?", adminId, authId).Delete(&adminAuth)
+	res := u.data.DB(ctx).Table("admin_auth").Where("admin_id=? and auth_id=?", adminId, authId).Delete(&adminAuth)
 	if res.Error != nil {
 		return false, errors.New(500, "CREATE_ADMIN_ERROR", "记录删除失败")
 	}

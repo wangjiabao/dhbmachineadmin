@@ -1001,6 +1001,9 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/MyAuthListReply_List'
+                super:
+                    type: integer
+                    format: int64
         MyAuthListReply_List:
             type: object
             properties:

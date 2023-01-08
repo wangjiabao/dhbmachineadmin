@@ -1216,6 +1216,14 @@ func (uuc *UserUseCase) AuthList(ctx context.Context, req *v1.AuthListRequest) (
 		return res, err
 	}
 
+	for _, v := range Auths {
+		res.Auth = append(res.Auth, &v1.AuthListReply_List{
+			Id:   v.ID,
+			Name: v.Name,
+			Path: v.Path,
+		})
+	}
+
 	return res, nil
 }
 
@@ -1242,6 +1250,10 @@ func (uuc *UserUseCase) MyAuthList(ctx context.Context, req *v1.MyAuthListReques
 	myAdmin, err = uuc.repo.GetAdminById(ctx, adminId)
 	if nil == myAdmin {
 		return res, err
+	}
+	if "super" == myAdmin.Type {
+		res.Super = int64(1)
+		return res, nil
 	}
 
 	adminAuth, err = uuc.repo.GetAdminAuth(ctx, adminId)
@@ -1309,7 +1321,7 @@ func (uuc *UserUseCase) UserAuthList(ctx context.Context, req *v1.UserAuthListRe
 		authIds = append(authIds, v.AuthId)
 	}
 
-	if 0 < len(authIds) {
+	if 0 >= len(authIds) {
 		return res, nil
 	}
 
