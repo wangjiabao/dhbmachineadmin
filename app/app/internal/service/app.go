@@ -445,6 +445,42 @@ func (a *AppService) AdminConfigUpdate(ctx context.Context, req *v1.AdminConfigU
 	return a.uuc.AdminConfigUpdate(ctx, req)
 }
 
+func (a *AppService) AdminLogin(ctx context.Context, req *v1.AdminLoginRequest) (*v1.AdminLoginReply, error) {
+	return a.uuc.AdminLogin(ctx, req, a.ca.JwtKey)
+}
+
+func (a *AppService) AuthList(ctx context.Context, req *v1.AuthListRequest) (*v1.AuthListReply, error) {
+	return a.uuc.AuthList(ctx, req)
+}
+
+func (a *AppService) MyAuthList(ctx context.Context, req *v1.MyAuthListRequest) (*v1.MyAuthListReply, error) {
+	return a.uuc.MyAuthList(ctx, req)
+}
+
+func (a *AppService) UserAuthList(ctx context.Context, req *v1.UserAuthListRequest) (*v1.UserAuthListReply, error) {
+	return a.uuc.UserAuthList(ctx, req)
+}
+
+func (a *AppService) AuthAdminCreate(ctx context.Context, req *v1.AuthAdminCreateRequest) (*v1.AuthAdminCreateReply, error) {
+	return a.uuc.AuthAdminCreate(ctx, req)
+}
+
+func (a *AppService) AuthAdminDelete(ctx context.Context, req *v1.AuthAdminDeleteRequest) (*v1.AuthAdminDeleteReply, error) {
+	return a.uuc.AuthAdminDelete(ctx, req)
+}
+
+func (a *AppService) AdminCreateAccount(ctx context.Context, req *v1.AdminCreateAccountRequest) (*v1.AdminCreateAccountReply, error) {
+	return a.uuc.AdminCreateAccount(ctx, req)
+}
+
+func (a *AppService) AdminChangePassword(ctx context.Context, req *v1.AdminChangePasswordRequest) (*v1.AdminChangePasswordReply, error) {
+	return a.uuc.AdminChangePassword(ctx, req)
+}
+
+func (a *AppService) AdminList(ctx context.Context, req *v1.AdminListRequest) (*v1.AdminListReply, error) {
+	return a.uuc.AdminList(ctx, req)
+}
+
 func (a *AppService) AdminWithdrawEth(ctx context.Context, req *v1.AdminWithdrawEthRequest) (*v1.AdminWithdrawEthReply, error) {
 	var (
 		withdraws    []*biz.Withdraw

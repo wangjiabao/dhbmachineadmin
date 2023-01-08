@@ -6,6 +6,24 @@ info:
     title: App API
     version: 0.0.1
 paths:
+    /api/admin_dhb/admin_list:
+        get:
+            tags:
+                - App
+            operationId: App_AdminList
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/AdminListReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
     /api/admin_dhb/all:
         get:
             tags:
@@ -18,6 +36,96 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/AdminAllReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/admin_dhb/auth_create:
+        post:
+            tags:
+                - App
+            operationId: App_AuthAdminCreate
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/AuthAdminCreateRequest_SendBody'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/AuthAdminCreateReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/admin_dhb/auth_delete:
+        post:
+            tags:
+                - App
+            operationId: App_AuthAdminDelete
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/AuthAdminDeleteRequest_SendBody'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/AuthAdminDeleteReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/admin_dhb/auth_list:
+        get:
+            tags:
+                - App
+            operationId: App_AuthList
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/AuthListReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/admin_dhb/change_password:
+        post:
+            tags:
+                - App
+            operationId: App_AdminChangePassword
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/AdminChangePasswordRequest_SendBody'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/AdminChangePasswordReply'
                 default:
                     description: Default error response
                     content:
@@ -71,6 +179,30 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/AdminConfigUpdateReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/admin_dhb/create_account:
+        post:
+            tags:
+                - App
+            operationId: App_AdminCreateAccount
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/AdminCreateAccountRequest_SendBody'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/AdminCreateAccountReply'
                 default:
                     description: Default error response
                     content:
@@ -141,6 +273,30 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Status'
+    /api/admin_dhb/login:
+        post:
+            tags:
+                - App
+            operationId: App_AdminLogin
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/AdminLoginRequest_SendBody'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/AdminLoginReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
     /api/admin_dhb/month_recommend:
         get:
             tags:
@@ -169,6 +325,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Status'
+    /api/admin_dhb/my_auth_list:
+        get:
+            tags:
+                - App
+            operationId: App_MyAuthList
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/MyAuthListReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
     /api/admin_dhb/reward_list:
         get:
             tags:
@@ -191,6 +365,30 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/AdminRewardListReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/admin_dhb/user_auth_list:
+        get:
+            tags:
+                - App
+            operationId: App_UserAuthList
+            parameters:
+                - name: adminId
+                  in: query
+                  schema:
+                    type: integer
+                    format: int64
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/UserAuthListReply'
                 default:
                     description: Default error response
                     content:
@@ -485,6 +683,16 @@ components:
                     type: string
                 allSystemRewardAndFee:
                     type: string
+        AdminChangePasswordReply:
+            type: object
+            properties: {}
+        AdminChangePasswordRequest_SendBody:
+            type: object
+            properties:
+                account:
+                    type: string
+                password:
+                    type: string
         AdminConfigReply:
             type: object
             properties:
@@ -516,9 +724,34 @@ components:
                     format: int64
                 value:
                     type: string
+        AdminCreateAccountReply:
+            type: object
+            properties: {}
+        AdminCreateAccountRequest_SendBody:
+            type: object
+            properties:
+                account:
+                    type: string
+                password:
+                    type: string
         AdminFeeReply:
             type: object
             properties: {}
+        AdminListReply:
+            type: object
+            properties:
+                account:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/AdminListReply_List'
+        AdminListReply_List:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: int64
+                account:
+                    type: string
         AdminLocationListReply:
             type: object
             properties:
@@ -550,6 +783,18 @@ components:
                 current:
                     type: string
                 currentMax:
+                    type: string
+        AdminLoginReply:
+            type: object
+            properties:
+                token:
+                    type: string
+        AdminLoginRequest_SendBody:
+            type: object
+            properties:
+                account:
+                    type: string
+                password:
                     type: string
         AdminMonthRecommendReply:
             type: object
@@ -683,6 +928,47 @@ components:
         AdminWithdrawReply:
             type: object
             properties: {}
+        AuthAdminCreateReply:
+            type: object
+            properties: {}
+        AuthAdminCreateRequest_SendBody:
+            type: object
+            properties:
+                adminId:
+                    type: integer
+                    format: int64
+                authId:
+                    type: integer
+                    format: int64
+        AuthAdminDeleteReply:
+            type: object
+            properties: {}
+        AuthAdminDeleteRequest_SendBody:
+            type: object
+            properties:
+                adminId:
+                    type: integer
+                    format: int64
+                authId:
+                    type: integer
+                    format: int64
+        AuthListReply:
+            type: object
+            properties:
+                auth:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/AuthListReply_List'
+        AuthListReply_List:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: int64
+                name:
+                    type: string
+                path:
+                    type: string
         DepositReply:
             type: object
             properties: {}
@@ -708,6 +994,23 @@ components:
                     description: The type of the serialized message.
             additionalProperties: true
             description: Contains an arbitrary serialized message along with a @type that describes the type of the serialized message.
+        MyAuthListReply:
+            type: object
+            properties:
+                auth:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/MyAuthListReply_List'
+        MyAuthListReply_List:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: int64
+                name:
+                    type: string
+                path:
+                    type: string
         RecommendListReply:
             type: object
             properties:
@@ -774,6 +1077,23 @@ components:
                         $ref: '#/components/schemas/GoogleProtobufAny'
                     description: A list of messages that carry the error details.  There is a common set of message types for APIs to use.
             description: 'The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors).'
+        UserAuthListReply:
+            type: object
+            properties:
+                auth:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/UserAuthListReply_List'
+        UserAuthListReply_List:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: int64
+                name:
+                    type: string
+                path:
+                    type: string
         UserInfoReply:
             type: object
             properties:

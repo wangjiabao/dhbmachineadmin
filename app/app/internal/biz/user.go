@@ -2,11 +2,15 @@ package biz
 
 import (
 	"context"
+	"crypto/md5"
 	v1 "dhb/app/app/api"
+	"dhb/app/app/internal/pkg/middleware/auth"
 	"encoding/base64"
 	"fmt"
 	"github.com/go-kratos/kratos/v2/errors"
 	"github.com/go-kratos/kratos/v2/log"
+	"github.com/go-kratos/kratos/v2/middleware/auth/jwt"
+	jwt2 "github.com/golang-jwt/jwt/v4"
 	"strconv"
 	"strings"
 	"time"
@@ -16,6 +20,26 @@ type User struct {
 	ID        int64
 	Address   string
 	CreatedAt time.Time
+}
+
+type Admin struct {
+	ID       int64
+	Password string
+	Account  string
+	Type     string
+}
+
+type AdminAuth struct {
+	ID      int64
+	AdminId int64
+	AuthId  int64
+}
+
+type Auth struct {
+	ID   int64
+	Name string
+	Path string
+	Url  string
 }
 
 type UserInfo struct {
@@ -162,13 +186,23 @@ type UserInfoRepo interface {
 
 type UserRepo interface {
 	GetUserById(ctx context.Context, Id int64) (*User, error)
+	GetAdminByAccount(ctx context.Context, account string, password string) (*Admin, error)
+	GetAdminById(ctx context.Context, id int64) (*Admin, error)
 	GetUserByAddresses(ctx context.Context, Addresses ...string) (map[string]*User, error)
 	GetUserByAddress(ctx context.Context, address string) (*User, error)
 	CreateUser(ctx context.Context, user *User) (*User, error)
+	CreateAdmin(ctx context.Context, a *Admin) (*Admin, error)
 	GetUserByUserIds(ctx context.Context, userIds ...int64) (map[int64]*User, error)
+	GetAdmins(ctx context.Context) ([]*Admin, error)
 	GetUsers(ctx context.Context, b *Pagination, address string) ([]*User, error, int64)
 	GetUserCount(ctx context.Context) (int64, error)
 	GetUserCountToday(ctx context.Context) (int64, error)
+	CreateAdminAuth(ctx context.Context, adminId int64, authId int64) (bool, error)
+	DeleteAdminAuth(ctx context.Context, adminId int64, authId int64) (bool, error)
+	GetAuths(ctx context.Context) ([]*Auth, error)
+	GetAuthByIds(ctx context.Context, ids ...int64) (map[int64]*Auth, error)
+	GetAdminAuth(ctx context.Context, adminId int64) ([]*AdminAuth, error)
+	UpdateAdminPassword(ctx context.Context, account string, password string) (*Admin, error)
 }
 
 func NewUserUseCase(repo UserRepo, tx Transaction, configRepo ConfigRepo, uiRepo UserInfoRepo, urRepo UserRecommendRepo, locationRepo LocationRepo, userCurrentMonthRecommendRepo UserCurrentMonthRecommendRepo, ubRepo UserBalanceRepo, logger log.Logger) *UserUseCase {
@@ -1015,6 +1049,348 @@ func (uuc *UserUseCase) AdminConfigUpdate(ctx context.Context, req *v1.AdminConf
 	}
 
 	return res, nil
+}
+
+func (uuc *UserUseCase) AdminLogin(ctx context.Context, req *v1.AdminLoginRequest, ca string) (*v1.AdminLoginReply, error) {
+	var (
+		admin *Admin
+		err   error
+	)
+
+	res := &v1.AdminLoginReply{}
+	password := fmt.Sprintf("%x", md5.Sum([]byte(req.SendBody.Password)))
+	fmt.Println(password)
+	admin, err = uuc.repo.GetAdminByAccount(ctx, req.SendBody.Account, password)
+	if nil != err {
+		return res, err
+	}
+
+	claims := auth.CustomClaims{
+		UserId:   admin.ID,
+		UserType: "admin",
+		StandardClaims: jwt2.StandardClaims{
+			NotBefore: time.Now().Unix(),              // 签名的生效时间
+			ExpiresAt: time.Now().Unix() + 60*60*24*7, // 7天过期
+			Issuer:    "DHB",
+		},
+	}
+	token, err := auth.CreateToken(claims, ca)
+	if err != nil {
+		return nil, errors.New(500, "AUTHORIZE_ERROR", "生成token失败")
+	}
+	res.Token = token
+	return res, nil
+}
+
+func (uuc *UserUseCase) AdminCreateAccount(ctx context.Context, req *v1.AdminCreateAccountRequest) (*v1.AdminCreateAccountReply, error) {
+	var (
+		admin    *Admin
+		myAdmin  *Admin
+		newAdmin *Admin
+		err      error
+	)
+
+	res := &v1.AdminCreateAccountReply{}
+
+	// 在上下文 context 中取出 claims 对象
+	var adminId int64
+	if claims, ok := jwt.FromContext(ctx); ok {
+		c := claims.(jwt2.MapClaims)
+		if c["UserId"] == nil {
+			return nil, errors.New(500, "ERROR_TOKEN", "无效TOKEN")
+		}
+		adminId = int64(c["UserId"].(float64))
+	}
+	myAdmin, err = uuc.repo.GetAdminById(ctx, adminId)
+	if nil == myAdmin {
+		return res, err
+	}
+	if "super" != myAdmin.Type {
+		return nil, errors.New(500, "ERROR_TOKEN", "非超管")
+	}
+
+	password := fmt.Sprintf("%x", md5.Sum([]byte(req.SendBody.Password)))
+	admin, err = uuc.repo.GetAdminByAccount(ctx, req.SendBody.Account, password)
+	if nil != admin {
+		return nil, errors.New(500, "ERROR_TOKEN", "已存在账户")
+	}
+
+	newAdmin, err = uuc.repo.CreateAdmin(ctx, &Admin{
+		Password: password,
+		Account:  req.SendBody.Account,
+	})
+
+	if nil != newAdmin {
+		return res, err
+	}
+
+	return res, nil
+}
+
+func (uuc *UserUseCase) AdminList(ctx context.Context, req *v1.AdminListRequest) (*v1.AdminListReply, error) {
+	var (
+		admins []*Admin
+	)
+
+	res := &v1.AdminListReply{Account: make([]*v1.AdminListReply_List, 0)}
+
+	admins, _ = uuc.repo.GetAdmins(ctx)
+	if nil == admins {
+		return res, nil
+	}
+
+	for _, v := range admins {
+		res.Account = append(res.Account, &v1.AdminListReply_List{
+			Id:      v.ID,
+			Account: v.Account,
+		})
+	}
+
+	return res, nil
+}
+
+func (uuc *UserUseCase) AdminChangePassword(ctx context.Context, req *v1.AdminChangePasswordRequest) (*v1.AdminChangePasswordReply, error) {
+	var (
+		myAdmin *Admin
+		admin   *Admin
+		err     error
+	)
+
+	res := &v1.AdminChangePasswordReply{}
+
+	// 在上下文 context 中取出 claims 对象
+	var adminId int64
+	if claims, ok := jwt.FromContext(ctx); ok {
+		c := claims.(jwt2.MapClaims)
+		if c["UserId"] == nil {
+			return nil, errors.New(500, "ERROR_TOKEN", "无效TOKEN")
+		}
+		adminId = int64(c["UserId"].(float64))
+	}
+	myAdmin, err = uuc.repo.GetAdminById(ctx, adminId)
+	if nil == myAdmin {
+		return res, err
+	}
+	if "super" != myAdmin.Type {
+		return nil, errors.New(500, "ERROR_TOKEN", "非超管")
+	}
+
+	password := fmt.Sprintf("%x", md5.Sum([]byte(req.SendBody.Password)))
+	admin, err = uuc.repo.UpdateAdminPassword(ctx, req.SendBody.Account, password)
+	if nil == admin {
+		return res, err
+	}
+
+	return res, nil
+}
+
+func (uuc *UserUseCase) AuthList(ctx context.Context, req *v1.AuthListRequest) (*v1.AuthListReply, error) {
+	var (
+		myAdmin *Admin
+		Auths   []*Auth
+		err     error
+	)
+
+	res := &v1.AuthListReply{}
+
+	// 在上下文 context 中取出 claims 对象
+	var adminId int64
+	if claims, ok := jwt.FromContext(ctx); ok {
+		c := claims.(jwt2.MapClaims)
+		if c["UserId"] == nil {
+			return nil, errors.New(500, "ERROR_TOKEN", "无效TOKEN")
+		}
+		adminId = int64(c["UserId"].(float64))
+	}
+	myAdmin, err = uuc.repo.GetAdminById(ctx, adminId)
+	if nil == myAdmin {
+		return res, err
+	}
+	if "super" != myAdmin.Type {
+		return nil, errors.New(500, "ERROR_TOKEN", "非超管")
+	}
+
+	Auths, err = uuc.repo.GetAuths(ctx)
+	if nil == Auths {
+		return res, err
+	}
+
+	return res, nil
+}
+
+func (uuc *UserUseCase) MyAuthList(ctx context.Context, req *v1.MyAuthListRequest) (*v1.MyAuthListReply, error) {
+	var (
+		myAdmin   *Admin
+		adminAuth []*AdminAuth
+		auths     map[int64]*Auth
+		authIds   []int64
+		err       error
+	)
+
+	res := &v1.MyAuthListReply{}
+
+	// 在上下文 context 中取出 claims 对象
+	var adminId int64
+	if claims, ok := jwt.FromContext(ctx); ok {
+		c := claims.(jwt2.MapClaims)
+		if c["UserId"] == nil {
+			return nil, errors.New(500, "ERROR_TOKEN", "无效TOKEN")
+		}
+		adminId = int64(c["UserId"].(float64))
+	}
+	myAdmin, err = uuc.repo.GetAdminById(ctx, adminId)
+	if nil == myAdmin {
+		return res, err
+	}
+
+	adminAuth, err = uuc.repo.GetAdminAuth(ctx, adminId)
+	if nil == adminAuth {
+		return res, err
+	}
+
+	for _, v := range adminAuth {
+		authIds = append(authIds, v.AuthId)
+	}
+
+	if 0 < len(authIds) {
+		return res, nil
+	}
+
+	auths, err = uuc.repo.GetAuthByIds(ctx, authIds...)
+	for _, v := range adminAuth {
+		if _, ok := auths[v.AuthId]; !ok {
+			continue
+		}
+		res.Auth = append(res.Auth, &v1.MyAuthListReply_List{
+			Id:   v.ID,
+			Name: auths[v.AuthId].Name,
+			Path: auths[v.AuthId].Path,
+		})
+	}
+
+	return res, nil
+}
+
+func (uuc *UserUseCase) UserAuthList(ctx context.Context, req *v1.UserAuthListRequest) (*v1.UserAuthListReply, error) {
+	var (
+		myAdmin   *Admin
+		adminAuth []*AdminAuth
+		auths     map[int64]*Auth
+		authIds   []int64
+		err       error
+	)
+
+	res := &v1.UserAuthListReply{}
+
+	// 在上下文 context 中取出 claims 对象
+	var adminId int64
+	if claims, ok := jwt.FromContext(ctx); ok {
+		c := claims.(jwt2.MapClaims)
+		if c["UserId"] == nil {
+			return nil, errors.New(500, "ERROR_TOKEN", "无效TOKEN")
+		}
+		adminId = int64(c["UserId"].(float64))
+	}
+	myAdmin, err = uuc.repo.GetAdminById(ctx, adminId)
+	if nil == myAdmin {
+		return res, err
+	}
+	if "super" != myAdmin.Type {
+		return nil, errors.New(500, "ERROR_TOKEN", "非超管")
+	}
+
+	adminAuth, err = uuc.repo.GetAdminAuth(ctx, req.AdminId)
+	if nil == adminAuth {
+		return res, err
+	}
+
+	for _, v := range adminAuth {
+		authIds = append(authIds, v.AuthId)
+	}
+
+	if 0 < len(authIds) {
+		return res, nil
+	}
+
+	auths, err = uuc.repo.GetAuthByIds(ctx, authIds...)
+	for _, v := range adminAuth {
+		if _, ok := auths[v.AuthId]; !ok {
+			continue
+		}
+		res.Auth = append(res.Auth, &v1.UserAuthListReply_List{
+			Id:   v.ID,
+			Name: auths[v.AuthId].Name,
+			Path: auths[v.AuthId].Path,
+		})
+	}
+
+	return res, nil
+}
+
+func (uuc *UserUseCase) AuthAdminCreate(ctx context.Context, req *v1.AuthAdminCreateRequest) (*v1.AuthAdminCreateReply, error) {
+	var (
+		myAdmin *Admin
+		err     error
+	)
+
+	res := &v1.AuthAdminCreateReply{}
+
+	// 在上下文 context 中取出 claims 对象
+	var adminId int64
+	if claims, ok := jwt.FromContext(ctx); ok {
+		c := claims.(jwt2.MapClaims)
+		if c["UserId"] == nil {
+			return nil, errors.New(500, "ERROR_TOKEN", "无效TOKEN")
+		}
+		adminId = int64(c["UserId"].(float64))
+	}
+	myAdmin, err = uuc.repo.GetAdminById(ctx, adminId)
+	if nil == myAdmin {
+		return res, err
+	}
+	if "super" != myAdmin.Type {
+		return nil, errors.New(500, "ERROR_TOKEN", "非超管")
+	}
+
+	_, err = uuc.repo.CreateAdminAuth(ctx, req.SendBody.AdminId, req.SendBody.AuthId)
+	if nil != err {
+		return nil, errors.New(500, "ERROR_TOKEN", "创建失败")
+	}
+
+	return res, err
+}
+
+func (uuc *UserUseCase) AuthAdminDelete(ctx context.Context, req *v1.AuthAdminDeleteRequest) (*v1.AuthAdminDeleteReply, error) {
+	var (
+		myAdmin *Admin
+		err     error
+	)
+
+	res := &v1.AuthAdminDeleteReply{}
+
+	// 在上下文 context 中取出 claims 对象
+	var adminId int64
+	if claims, ok := jwt.FromContext(ctx); ok {
+		c := claims.(jwt2.MapClaims)
+		if c["UserId"] == nil {
+			return nil, errors.New(500, "ERROR_TOKEN", "无效TOKEN")
+		}
+		adminId = int64(c["UserId"].(float64))
+	}
+	myAdmin, err = uuc.repo.GetAdminById(ctx, adminId)
+	if nil == myAdmin {
+		return res, err
+	}
+	if "super" != myAdmin.Type {
+		return nil, errors.New(500, "ERROR_TOKEN", "非超管")
+	}
+
+	_, err = uuc.repo.DeleteAdminAuth(ctx, req.SendBody.AdminId, req.SendBody.AuthId)
+	if nil != err {
+		return nil, errors.New(500, "ERROR_TOKEN", "删除失败")
+	}
+
+	return res, err
 }
 
 func (uuc *UserUseCase) GetWithdrawPassOrRewardedList(ctx context.Context) ([]*Withdraw, error) {

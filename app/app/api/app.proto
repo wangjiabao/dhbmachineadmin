@@ -140,6 +140,64 @@ service App {
 		};
 	};
 
+	rpc AdminLogin (AdminLoginRequest) returns (AdminLoginReply) {
+		option (google.api.http) = {
+			post: "/api/admin_dhb/login"
+			body: "send_body"
+		};
+	};
+
+	rpc AdminCreateAccount (AdminCreateAccountRequest) returns (AdminCreateAccountReply) {
+		option (google.api.http) = {
+			post: "/api/admin_dhb/create_account"
+			body: "send_body"
+		};
+	};
+
+	rpc AdminChangePassword (AdminChangePasswordRequest) returns (AdminChangePasswordReply) {
+		option (google.api.http) = {
+			post: "/api/admin_dhb/change_password"
+			body: "send_body"
+		};
+	};
+
+	rpc AdminList (AdminListRequest) returns (AdminListReply) {
+		option (google.api.http) = {
+			get: "/api/admin_dhb/admin_list"
+		};
+	};
+
+	rpc AuthList (AuthListRequest) returns (AuthListReply) {
+		option (google.api.http) = {
+			get: "/api/admin_dhb/auth_list"
+		};
+	};
+
+	rpc MyAuthList (MyAuthListRequest) returns (MyAuthListReply) {
+		option (google.api.http) = {
+			get: "/api/admin_dhb/my_auth_list"
+		};
+	};
+
+	rpc UserAuthList (UserAuthListRequest) returns (UserAuthListReply) {
+		option (google.api.http) = {
+			get: "/api/admin_dhb/user_auth_list"
+		};
+	};
+
+	rpc AuthAdminCreate (AuthAdminCreateRequest) returns (AuthAdminCreateReply) {
+		option (google.api.http) = {
+			post: "/api/admin_dhb/auth_create"
+			body: "send_body"
+		};
+	};
+
+	rpc AuthAdminDelete (AuthAdminDeleteRequest) returns (AuthAdminDeleteReply) {
+		option (google.api.http) = {
+			post: "/api/admin_dhb/auth_delete"
+			body: "send_body"
+		};
+	};
 }
 
 message EthAuthorizeRequest {
@@ -426,6 +484,54 @@ message AdminConfigReply {
 	int64 count = 2;
 }
 
+message AdminListRequest {
+}
+
+message  AdminListReply {
+	repeated List account = 1;
+	message List {
+		int64 id = 1;
+		string account = 2;
+	}
+}
+
+message AuthListRequest {
+}
+
+message  AuthListReply {
+	repeated List auth = 1;
+	message List {
+		int64 id = 1;
+		string name = 2;
+		string path = 3;
+	}
+}
+
+message UserAuthListRequest {
+	int64 admin_id = 1;
+}
+
+message  UserAuthListReply {
+	repeated List auth = 1;
+	message List {
+		int64 id = 1;
+		string name = 2;
+		string path = 3;
+	}
+}
+
+message MyAuthListRequest {
+}
+
+message  MyAuthListReply {
+	repeated List auth = 1;
+	message List {
+		int64 id = 1;
+		string name = 2;
+		string path = 3;
+	}
+}
+
 message AdminConfigUpdateRequest {
 	message SendBody{
 		int64 id = 1;
@@ -436,5 +542,70 @@ message AdminConfigUpdateRequest {
 }
 
 message AdminConfigUpdateReply {
+
+}
+
+message AuthAdminCreateRequest {
+	message SendBody{
+		int64 adminId = 1;
+		int64 authId = 2;
+	}
+
+	SendBody send_body = 1;
+}
+
+message AuthAdminCreateReply {
+
+}
+
+message AuthAdminDeleteRequest {
+	message SendBody{
+		int64 adminId = 1;
+		int64 authId = 2;
+	}
+
+	SendBody send_body = 1;
+}
+
+message AuthAdminDeleteReply {
+
+}
+
+message AdminLoginRequest {
+	message SendBody{
+		string account = 1;
+		string password = 2;
+	}
+
+	SendBody send_body = 1;
+}
+
+message AdminLoginReply {
+	string token = 1;
+}
+
+message AdminChangePasswordRequest {
+	message SendBody{
+		string account = 1;
+		string password = 2;
+	}
+
+	SendBody send_body = 1;
+}
+
+message AdminChangePasswordReply {
+
+}
+
+message AdminCreateAccountRequest {
+	message SendBody{
+		string account = 1;
+		string password = 2;
+	}
+
+	SendBody send_body = 1;
+}
+
+message AdminCreateAccountReply {
 
 }

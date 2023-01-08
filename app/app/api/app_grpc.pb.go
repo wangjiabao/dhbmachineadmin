@@ -42,6 +42,15 @@ type AppClient interface {
 	AdminMonthRecommend(ctx context.Context, in *AdminMonthRecommendRequest, opts ...grpc.CallOption) (*AdminMonthRecommendReply, error)
 	AdminConfig(ctx context.Context, in *AdminConfigRequest, opts ...grpc.CallOption) (*AdminConfigReply, error)
 	AdminConfigUpdate(ctx context.Context, in *AdminConfigUpdateRequest, opts ...grpc.CallOption) (*AdminConfigUpdateReply, error)
+	AdminLogin(ctx context.Context, in *AdminLoginRequest, opts ...grpc.CallOption) (*AdminLoginReply, error)
+	AdminCreateAccount(ctx context.Context, in *AdminCreateAccountRequest, opts ...grpc.CallOption) (*AdminCreateAccountReply, error)
+	AdminChangePassword(ctx context.Context, in *AdminChangePasswordRequest, opts ...grpc.CallOption) (*AdminChangePasswordReply, error)
+	AdminList(ctx context.Context, in *AdminListRequest, opts ...grpc.CallOption) (*AdminListReply, error)
+	AuthList(ctx context.Context, in *AuthListRequest, opts ...grpc.CallOption) (*AuthListReply, error)
+	MyAuthList(ctx context.Context, in *MyAuthListRequest, opts ...grpc.CallOption) (*MyAuthListReply, error)
+	UserAuthList(ctx context.Context, in *UserAuthListRequest, opts ...grpc.CallOption) (*UserAuthListReply, error)
+	AuthAdminCreate(ctx context.Context, in *AuthAdminCreateRequest, opts ...grpc.CallOption) (*AuthAdminCreateReply, error)
+	AuthAdminDelete(ctx context.Context, in *AuthAdminDeleteRequest, opts ...grpc.CallOption) (*AuthAdminDeleteReply, error)
 }
 
 type appClient struct {
@@ -232,6 +241,87 @@ func (c *appClient) AdminConfigUpdate(ctx context.Context, in *AdminConfigUpdate
 	return out, nil
 }
 
+func (c *appClient) AdminLogin(ctx context.Context, in *AdminLoginRequest, opts ...grpc.CallOption) (*AdminLoginReply, error) {
+	out := new(AdminLoginReply)
+	err := c.cc.Invoke(ctx, "/api.App/AdminLogin", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *appClient) AdminCreateAccount(ctx context.Context, in *AdminCreateAccountRequest, opts ...grpc.CallOption) (*AdminCreateAccountReply, error) {
+	out := new(AdminCreateAccountReply)
+	err := c.cc.Invoke(ctx, "/api.App/AdminCreateAccount", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *appClient) AdminChangePassword(ctx context.Context, in *AdminChangePasswordRequest, opts ...grpc.CallOption) (*AdminChangePasswordReply, error) {
+	out := new(AdminChangePasswordReply)
+	err := c.cc.Invoke(ctx, "/api.App/AdminChangePassword", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *appClient) AdminList(ctx context.Context, in *AdminListRequest, opts ...grpc.CallOption) (*AdminListReply, error) {
+	out := new(AdminListReply)
+	err := c.cc.Invoke(ctx, "/api.App/AdminList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *appClient) AuthList(ctx context.Context, in *AuthListRequest, opts ...grpc.CallOption) (*AuthListReply, error) {
+	out := new(AuthListReply)
+	err := c.cc.Invoke(ctx, "/api.App/AuthList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *appClient) MyAuthList(ctx context.Context, in *MyAuthListRequest, opts ...grpc.CallOption) (*MyAuthListReply, error) {
+	out := new(MyAuthListReply)
+	err := c.cc.Invoke(ctx, "/api.App/MyAuthList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *appClient) UserAuthList(ctx context.Context, in *UserAuthListRequest, opts ...grpc.CallOption) (*UserAuthListReply, error) {
+	out := new(UserAuthListReply)
+	err := c.cc.Invoke(ctx, "/api.App/UserAuthList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *appClient) AuthAdminCreate(ctx context.Context, in *AuthAdminCreateRequest, opts ...grpc.CallOption) (*AuthAdminCreateReply, error) {
+	out := new(AuthAdminCreateReply)
+	err := c.cc.Invoke(ctx, "/api.App/AuthAdminCreate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *appClient) AuthAdminDelete(ctx context.Context, in *AuthAdminDeleteRequest, opts ...grpc.CallOption) (*AuthAdminDeleteReply, error) {
+	out := new(AuthAdminDeleteReply)
+	err := c.cc.Invoke(ctx, "/api.App/AuthAdminDelete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AppServer is the server API for App service.
 // All implementations must embed UnimplementedAppServer
 // for forward compatibility
@@ -256,6 +346,15 @@ type AppServer interface {
 	AdminMonthRecommend(context.Context, *AdminMonthRecommendRequest) (*AdminMonthRecommendReply, error)
 	AdminConfig(context.Context, *AdminConfigRequest) (*AdminConfigReply, error)
 	AdminConfigUpdate(context.Context, *AdminConfigUpdateRequest) (*AdminConfigUpdateReply, error)
+	AdminLogin(context.Context, *AdminLoginRequest) (*AdminLoginReply, error)
+	AdminCreateAccount(context.Context, *AdminCreateAccountRequest) (*AdminCreateAccountReply, error)
+	AdminChangePassword(context.Context, *AdminChangePasswordRequest) (*AdminChangePasswordReply, error)
+	AdminList(context.Context, *AdminListRequest) (*AdminListReply, error)
+	AuthList(context.Context, *AuthListRequest) (*AuthListReply, error)
+	MyAuthList(context.Context, *MyAuthListRequest) (*MyAuthListReply, error)
+	UserAuthList(context.Context, *UserAuthListRequest) (*UserAuthListReply, error)
+	AuthAdminCreate(context.Context, *AuthAdminCreateRequest) (*AuthAdminCreateReply, error)
+	AuthAdminDelete(context.Context, *AuthAdminDeleteRequest) (*AuthAdminDeleteReply, error)
 	mustEmbedUnimplementedAppServer()
 }
 
@@ -322,6 +421,33 @@ func (UnimplementedAppServer) AdminConfig(context.Context, *AdminConfigRequest) 
 }
 func (UnimplementedAppServer) AdminConfigUpdate(context.Context, *AdminConfigUpdateRequest) (*AdminConfigUpdateReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AdminConfigUpdate not implemented")
+}
+func (UnimplementedAppServer) AdminLogin(context.Context, *AdminLoginRequest) (*AdminLoginReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AdminLogin not implemented")
+}
+func (UnimplementedAppServer) AdminCreateAccount(context.Context, *AdminCreateAccountRequest) (*AdminCreateAccountReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AdminCreateAccount not implemented")
+}
+func (UnimplementedAppServer) AdminChangePassword(context.Context, *AdminChangePasswordRequest) (*AdminChangePasswordReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AdminChangePassword not implemented")
+}
+func (UnimplementedAppServer) AdminList(context.Context, *AdminListRequest) (*AdminListReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AdminList not implemented")
+}
+func (UnimplementedAppServer) AuthList(context.Context, *AuthListRequest) (*AuthListReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AuthList not implemented")
+}
+func (UnimplementedAppServer) MyAuthList(context.Context, *MyAuthListRequest) (*MyAuthListReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MyAuthList not implemented")
+}
+func (UnimplementedAppServer) UserAuthList(context.Context, *UserAuthListRequest) (*UserAuthListReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UserAuthList not implemented")
+}
+func (UnimplementedAppServer) AuthAdminCreate(context.Context, *AuthAdminCreateRequest) (*AuthAdminCreateReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AuthAdminCreate not implemented")
+}
+func (UnimplementedAppServer) AuthAdminDelete(context.Context, *AuthAdminDeleteRequest) (*AuthAdminDeleteReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AuthAdminDelete not implemented")
 }
 func (UnimplementedAppServer) mustEmbedUnimplementedAppServer() {}
 
@@ -696,6 +822,168 @@ func _App_AdminConfigUpdate_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _App_AdminLogin_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AdminLoginRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppServer).AdminLogin(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.App/AdminLogin",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppServer).AdminLogin(ctx, req.(*AdminLoginRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _App_AdminCreateAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AdminCreateAccountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppServer).AdminCreateAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.App/AdminCreateAccount",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppServer).AdminCreateAccount(ctx, req.(*AdminCreateAccountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _App_AdminChangePassword_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AdminChangePasswordRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppServer).AdminChangePassword(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.App/AdminChangePassword",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppServer).AdminChangePassword(ctx, req.(*AdminChangePasswordRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _App_AdminList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AdminListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppServer).AdminList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.App/AdminList",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppServer).AdminList(ctx, req.(*AdminListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _App_AuthList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AuthListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppServer).AuthList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.App/AuthList",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppServer).AuthList(ctx, req.(*AuthListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _App_MyAuthList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MyAuthListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppServer).MyAuthList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.App/MyAuthList",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppServer).MyAuthList(ctx, req.(*MyAuthListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _App_UserAuthList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UserAuthListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppServer).UserAuthList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.App/UserAuthList",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppServer).UserAuthList(ctx, req.(*UserAuthListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _App_AuthAdminCreate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AuthAdminCreateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppServer).AuthAdminCreate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.App/AuthAdminCreate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppServer).AuthAdminCreate(ctx, req.(*AuthAdminCreateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _App_AuthAdminDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AuthAdminDeleteRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppServer).AuthAdminDelete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.App/AuthAdminDelete",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppServer).AuthAdminDelete(ctx, req.(*AuthAdminDeleteRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // App_ServiceDesc is the grpc.ServiceDesc for App service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -782,6 +1070,42 @@ var App_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "AdminConfigUpdate",
 			Handler:    _App_AdminConfigUpdate_Handler,
+		},
+		{
+			MethodName: "AdminLogin",
+			Handler:    _App_AdminLogin_Handler,
+		},
+		{
+			MethodName: "AdminCreateAccount",
+			Handler:    _App_AdminCreateAccount_Handler,
+		},
+		{
+			MethodName: "AdminChangePassword",
+			Handler:    _App_AdminChangePassword_Handler,
+		},
+		{
+			MethodName: "AdminList",
+			Handler:    _App_AdminList_Handler,
+		},
+		{
+			MethodName: "AuthList",
+			Handler:    _App_AuthList_Handler,
+		},
+		{
+			MethodName: "MyAuthList",
+			Handler:    _App_MyAuthList_Handler,
+		},
+		{
+			MethodName: "UserAuthList",
+			Handler:    _App_UserAuthList_Handler,
+		},
+		{
+			MethodName: "AuthAdminCreate",
+			Handler:    _App_AuthAdminCreate_Handler,
+		},
+		{
+			MethodName: "AuthAdminDelete",
+			Handler:    _App_AuthAdminDelete_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

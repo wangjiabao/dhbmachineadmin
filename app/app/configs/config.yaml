@@ -1,6 +1,6 @@
 server:
   http:
-    addr: 0.0.0.0:8001
+    addr: 0.0.0.0:8002
     timeout: 60s
   grpc:
     addr: 0.0.0.0:9000
@@ -14,4 +14,4 @@ data:
     read_timeout: 0.2s
     write_timeout: 0.2s
 auth:
-  jwt_key: 7d25c9b8d23acb6bc6565270495ed7a0 # md5 dhbmachine
+  jwt_key: 5e68c8bddab801eee9681436e43c40bf # md5 dhbmachineadminrel

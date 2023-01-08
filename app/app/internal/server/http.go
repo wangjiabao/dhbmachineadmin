@@ -22,7 +22,7 @@ func NewHTTPServer(c *conf.Server, app *service.AppService, logger log.Logger) *
 			recovery.Recovery(),
 			selector.Server( // jwt 验证
 				jwt.Server(func(token *jwt2.Token) (interface{}, error) {
-					return []byte("7d25c9b8d23acb6bc6565270495ed7a0"), nil
+					return []byte("5e68c8bddab801eee9681436e43c40bf"), nil
 				}, jwt.WithSigningMethod(jwt2.SigningMethodHS256)),
 			).Match(NewWhiteListMatcher()).Build(),
 		),
@@ -49,7 +49,7 @@ func NewHTTPServer(c *conf.Server, app *service.AppService, logger log.Logger) *
 // NewWhiteListMatcher 设置白名单，不需要 token 验证的接口
 func NewWhiteListMatcher() selector.MatchFunc {
 	whiteList := make(map[string]struct{})
-	//whiteList["/api.App/EthAuthorize"] = struct{}{}
+	whiteList["/api.App/AdminLogin"] = struct{}{}
 	//whiteList["/api.App/Deposit"] = struct{}{}
 	//whiteList["/api.App/AdminLocationList"] = struct{}{}
 	//whiteList["/api.App/AdminRewardList"] = struct{}{}

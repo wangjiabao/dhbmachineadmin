@@ -98,6 +98,26 @@ type Reward struct {
 	UpdatedAt        time.Time `gorm:"type:datetime;not null"`
 }
 
+type Admin struct {
+	ID       int64  `gorm:"primarykey;type:int"`
+	Account  string `gorm:"type:varchar(100);not null"`
+	Password string `gorm:"type:varchar(100);not null"`
+	Type     string `gorm:"type:varchar(40);not null"`
+}
+
+type Auth struct {
+	ID   int64  `gorm:"primarykey;type:int"`
+	Name string `gorm:"type:varchar(100);not null"`
+	Path string `gorm:"type:varchar(200);not null"`
+	Url  string `gorm:"type:varchar(200);not null"`
+}
+
+type AdminAuth struct {
+	ID      int64 `gorm:"primarykey;type:int"`
+	AdminId int64 `gorm:"type:int"`
+	AuthId  int64 `gorm:"type:int"`
+}
+
 type UserRepo struct {
 	data *Data
 	log  *log.Helper
@@ -265,6 +285,44 @@ func (u *UserRepo) GetUserById(ctx context.Context, Id int64) (*biz.User, error)
 	}, nil
 }
 
+// GetAdminByAccount .
+func (u *UserRepo) GetAdminByAccount(ctx context.Context, account string, password string) (*biz.Admin, error) {
+	var admin Admin
+	if err := u.data.db.Where("account=? and password=?", account, password).Table("admin").First(&admin).Error; err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return nil, errors.NotFound("ADMIN_NOT_FOUND", "admin not found")
+		}
+
+		return nil, errors.New(500, "ADMIN ERROR", err.Error())
+	}
+
+	return &biz.Admin{
+		ID:       admin.ID,
+		Password: admin.Password,
+		Account:  admin.Account,
+		Type:     admin.Type,
+	}, nil
+}
+
+// GetAdminById .
+func (u *UserRepo) GetAdminById(ctx context.Context, id int64) (*biz.Admin, error) {
+	var admin Admin
+	if err := u.data.db.Where("id=?", id).Table("admin").First(&admin).Error; err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return nil, errors.NotFound("ADMIN_NOT_FOUND", "admin not found")
+		}
+
+		return nil, errors.New(500, "ADMIN ERROR", err.Error())
+	}
+
+	return &biz.Admin{
+		ID:       admin.ID,
+		Password: admin.Password,
+		Account:  admin.Account,
+		Type:     admin.Type,
+	}, nil
+}
+
 // GetUserInfoByUserId .
 func (ui *UserInfoRepo) GetUserInfoByUserId(ctx context.Context, userId int64) (*biz.UserInfo, error) {
 	var userInfo UserInfo
@@ -359,6 +417,93 @@ func (u *UserRepo) GetUserByUserIds(ctx context.Context, userIds ...int64) (map[
 	return res, nil
 }
 
+// GetAdmins .
+func (u *UserRepo) GetAdmins(ctx context.Context) ([]*biz.Admin, error) {
+	var admins []*Admin
+	if err := u.data.db.Table("admin").Find(&admins).Error; err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return nil, errors.NotFound("AdMIN_NOT_FOUND", "admin not found")
+		}
+
+		return nil, errors.New(500, "ADMIN ERROR", err.Error())
+	}
+
+	res := make([]*biz.Admin, 0)
+	for _, item := range admins {
+		res = append(res, &biz.Admin{
+			ID:      item.ID,
+			Account: item.Account,
+		})
+	}
+	return res, nil
+}
+
+// GetAuths .
+func (u *UserRepo) GetAuths(ctx context.Context) ([]*biz.Auth, error) {
+	var auths []*Auth
+	if err := u.data.db.Table("auth").Find(&auths).Error; err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return nil, errors.NotFound("AUTH_NOT_FOUND", "auth not found")
+		}
+
+		return nil, errors.New(500, "AUTH ERROR", err.Error())
+	}
+
+	res := make([]*biz.Auth, 0)
+	for _, item := range auths {
+		res = append(res, &biz.Auth{
+			ID:   item.ID,
+			Name: item.Name,
+			Path: item.Path,
+		})
+	}
+	return res, nil
+}
+
+// GetAuthByIds .
+func (u *UserRepo) GetAuthByIds(ctx context.Context, ids ...int64) (map[int64]*biz.Auth, error) {
+	var auths []*Auth
+	if err := u.data.db.Table("auth").Where("id IN (?)", ids).Find(&auths).Error; err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return nil, errors.NotFound("AUTH_NOT_FOUND", "auth not found")
+		}
+
+		return nil, errors.New(500, "AUTH ERROR", err.Error())
+	}
+
+	res := make(map[int64]*biz.Auth, 0)
+	for _, item := range auths {
+		res[item.ID] = &biz.Auth{
+			ID:   item.ID,
+			Name: item.Name,
+			Path: item.Path,
+		}
+	}
+	return res, nil
+}
+
+// GetAdminAuth .
+func (u *UserRepo) GetAdminAuth(ctx context.Context, adminId int64) ([]*biz.AdminAuth, error) {
+	var auths []*AdminAuth
+	if err := u.data.db.Table("admin_auth").Where("admin_id=?", adminId).Find(&auths).Error; err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return nil, errors.NotFound("AUTH_NOT_FOUND", "auth not found")
+		}
+
+		return nil, errors.New(500, "AUTH ERROR", err.Error())
+	}
+
+	res := make([]*biz.AdminAuth, 0)
+	for _, item := range auths {
+		res = append(res, &biz.AdminAuth{
+			ID:      item.ID,
+			AdminId: item.AdminId,
+			AuthId:  item.AuthId,
+		})
+	}
+	return res, nil
+}
+
 // GetUsers .
 func (u *UserRepo) GetUsers(ctx context.Context, b *biz.Pagination, address string) ([]*biz.User, error, int64) {
 	var (
@@ -406,6 +551,50 @@ func (u *UserRepo) CreateUser(ctx context.Context, uc *biz.User) (*biz.User, err
 	}, nil
 }
 
+// CreateAdmin .
+func (u *UserRepo) CreateAdmin(ctx context.Context, a *biz.Admin) (*biz.Admin, error) {
+	var admin Admin
+	admin.Account = a.Account
+	admin.Password = a.Password
+	res := u.data.DB(ctx).Table("admin").Create(&admin)
+	if res.Error != nil {
+		return nil, errors.New(500, "CREATE_ADMIN_ERROR", "用户创建失败")
+	}
+
+	return &biz.Admin{
+		ID:       admin.ID,
+		Password: admin.Password,
+		Account:  admin.Account,
+		Type:     admin.Type,
+	}, nil
+}
+
+// CreateAdminAuth .
+func (u *UserRepo) CreateAdminAuth(ctx context.Context, adminId int64, authId int64) (bool, error) {
+	var adminAuth AdminAuth
+	adminAuth.AdminId = adminId
+	adminAuth.AuthId = authId
+	res := u.data.DB(ctx).Table("admin").Create(&adminAuth)
+	if res.Error != nil {
+		return false, errors.New(500, "CREATE_ADMIN_ERROR", "记录创建失败")
+	}
+
+	return true, nil
+}
+
+// DeleteAdminAuth .
+func (u *UserRepo) DeleteAdminAuth(ctx context.Context, adminId int64, authId int64) (bool, error) {
+	var adminAuth AdminAuth
+	adminAuth.AdminId = adminId
+	adminAuth.AuthId = authId
+	res := u.data.DB(ctx).Table("admin").Where("admin_id=? and auth_id=?", adminId, authId).Delete(&adminAuth)
+	if res.Error != nil {
+		return false, errors.New(500, "CREATE_ADMIN_ERROR", "记录删除失败")
+	}
+
+	return true, nil
+}
+
 // CreateUserInfo .
 func (ui *UserInfoRepo) CreateUserInfo(ctx context.Context, u *biz.User) (*biz.UserInfo, error) {
 	var userInfo UserInfo
@@ -440,6 +629,23 @@ func (ui *UserInfoRepo) UpdateUserInfo(ctx context.Context, u *biz.UserInfo) (*b
 		UserId:           userInfo.UserId,
 		Vip:              userInfo.Vip,
 		HistoryRecommend: userInfo.HistoryRecommend,
+	}, nil
+}
+
+// UpdateAdminPassword .
+func (u *UserRepo) UpdateAdminPassword(ctx context.Context, account string, password string) (*biz.Admin, error) {
+	var admin Admin
+	admin.Password = password
+	res := u.data.DB(ctx).Table("admin").Where("account=?", account).Updates(&admin)
+	if res.Error != nil {
+		return nil, errors.New(500, "UPDATE_ADMIN_ERROR", "用户信息修改失败")
+	}
+
+	return &biz.Admin{
+		ID:       admin.ID,
+		Password: admin.Password,
+		Account:  admin.Account,
+		Type:     admin.Type,
 	}, nil
 }
 

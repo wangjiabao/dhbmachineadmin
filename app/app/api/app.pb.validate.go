@@ -4674,6 +4674,950 @@ var _ interface {
 	ErrorName() string
 } = AdminConfigReplyValidationError{}
 
+// Validate checks the field values on AdminListRequest with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *AdminListRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AdminListRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// AdminListRequestMultiError, or nil if none found.
+func (m *AdminListRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AdminListRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return AdminListRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// AdminListRequestMultiError is an error wrapping multiple validation errors
+// returned by AdminListRequest.ValidateAll() if the designated constraints
+// aren't met.
+type AdminListRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AdminListRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AdminListRequestMultiError) AllErrors() []error { return m }
+
+// AdminListRequestValidationError is the validation error returned by
+// AdminListRequest.Validate if the designated constraints aren't met.
+type AdminListRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AdminListRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AdminListRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AdminListRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AdminListRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AdminListRequestValidationError) ErrorName() string { return "AdminListRequestValidationError" }
+
+// Error satisfies the builtin error interface
+func (e AdminListRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAdminListRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AdminListRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AdminListRequestValidationError{}
+
+// Validate checks the field values on AdminListReply with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *AdminListReply) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AdminListReply with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in AdminListReplyMultiError,
+// or nil if none found.
+func (m *AdminListReply) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AdminListReply) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetAccount() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, AdminListReplyValidationError{
+						field:  fmt.Sprintf("Account[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, AdminListReplyValidationError{
+						field:  fmt.Sprintf("Account[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return AdminListReplyValidationError{
+					field:  fmt.Sprintf("Account[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return AdminListReplyMultiError(errors)
+	}
+
+	return nil
+}
+
+// AdminListReplyMultiError is an error wrapping multiple validation errors
+// returned by AdminListReply.ValidateAll() if the designated constraints
+// aren't met.
+type AdminListReplyMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AdminListReplyMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AdminListReplyMultiError) AllErrors() []error { return m }
+
+// AdminListReplyValidationError is the validation error returned by
+// AdminListReply.Validate if the designated constraints aren't met.
+type AdminListReplyValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AdminListReplyValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AdminListReplyValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AdminListReplyValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AdminListReplyValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AdminListReplyValidationError) ErrorName() string { return "AdminListReplyValidationError" }
+
+// Error satisfies the builtin error interface
+func (e AdminListReplyValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAdminListReply.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AdminListReplyValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AdminListReplyValidationError{}
+
+// Validate checks the field values on AuthListRequest with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *AuthListRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AuthListRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// AuthListRequestMultiError, or nil if none found.
+func (m *AuthListRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AuthListRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return AuthListRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// AuthListRequestMultiError is an error wrapping multiple validation errors
+// returned by AuthListRequest.ValidateAll() if the designated constraints
+// aren't met.
+type AuthListRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AuthListRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AuthListRequestMultiError) AllErrors() []error { return m }
+
+// AuthListRequestValidationError is the validation error returned by
+// AuthListRequest.Validate if the designated constraints aren't met.
+type AuthListRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AuthListRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AuthListRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AuthListRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AuthListRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AuthListRequestValidationError) ErrorName() string { return "AuthListRequestValidationError" }
+
+// Error satisfies the builtin error interface
+func (e AuthListRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAuthListRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AuthListRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AuthListRequestValidationError{}
+
+// Validate checks the field values on AuthListReply with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *AuthListReply) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AuthListReply with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in AuthListReplyMultiError, or
+// nil if none found.
+func (m *AuthListReply) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AuthListReply) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetAuth() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, AuthListReplyValidationError{
+						field:  fmt.Sprintf("Auth[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, AuthListReplyValidationError{
+						field:  fmt.Sprintf("Auth[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return AuthListReplyValidationError{
+					field:  fmt.Sprintf("Auth[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return AuthListReplyMultiError(errors)
+	}
+
+	return nil
+}
+
+// AuthListReplyMultiError is an error wrapping multiple validation errors
+// returned by AuthListReply.ValidateAll() if the designated constraints
+// aren't met.
+type AuthListReplyMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AuthListReplyMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AuthListReplyMultiError) AllErrors() []error { return m }
+
+// AuthListReplyValidationError is the validation error returned by
+// AuthListReply.Validate if the designated constraints aren't met.
+type AuthListReplyValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AuthListReplyValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AuthListReplyValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AuthListReplyValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AuthListReplyValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AuthListReplyValidationError) ErrorName() string { return "AuthListReplyValidationError" }
+
+// Error satisfies the builtin error interface
+func (e AuthListReplyValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAuthListReply.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AuthListReplyValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AuthListReplyValidationError{}
+
+// Validate checks the field values on UserAuthListRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UserAuthListRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UserAuthListRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UserAuthListRequestMultiError, or nil if none found.
+func (m *UserAuthListRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UserAuthListRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for AdminId
+
+	if len(errors) > 0 {
+		return UserAuthListRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// UserAuthListRequestMultiError is an error wrapping multiple validation
+// errors returned by UserAuthListRequest.ValidateAll() if the designated
+// constraints aren't met.
+type UserAuthListRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UserAuthListRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UserAuthListRequestMultiError) AllErrors() []error { return m }
+
+// UserAuthListRequestValidationError is the validation error returned by
+// UserAuthListRequest.Validate if the designated constraints aren't met.
+type UserAuthListRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UserAuthListRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UserAuthListRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UserAuthListRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UserAuthListRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UserAuthListRequestValidationError) ErrorName() string {
+	return "UserAuthListRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UserAuthListRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUserAuthListRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UserAuthListRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UserAuthListRequestValidationError{}
+
+// Validate checks the field values on UserAuthListReply with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *UserAuthListReply) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UserAuthListReply with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UserAuthListReplyMultiError, or nil if none found.
+func (m *UserAuthListReply) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UserAuthListReply) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetAuth() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, UserAuthListReplyValidationError{
+						field:  fmt.Sprintf("Auth[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, UserAuthListReplyValidationError{
+						field:  fmt.Sprintf("Auth[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return UserAuthListReplyValidationError{
+					field:  fmt.Sprintf("Auth[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return UserAuthListReplyMultiError(errors)
+	}
+
+	return nil
+}
+
+// UserAuthListReplyMultiError is an error wrapping multiple validation errors
+// returned by UserAuthListReply.ValidateAll() if the designated constraints
+// aren't met.
+type UserAuthListReplyMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UserAuthListReplyMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UserAuthListReplyMultiError) AllErrors() []error { return m }
+
+// UserAuthListReplyValidationError is the validation error returned by
+// UserAuthListReply.Validate if the designated constraints aren't met.
+type UserAuthListReplyValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UserAuthListReplyValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UserAuthListReplyValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UserAuthListReplyValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UserAuthListReplyValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UserAuthListReplyValidationError) ErrorName() string {
+	return "UserAuthListReplyValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UserAuthListReplyValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUserAuthListReply.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UserAuthListReplyValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UserAuthListReplyValidationError{}
+
+// Validate checks the field values on MyAuthListRequest with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *MyAuthListRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on MyAuthListRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// MyAuthListRequestMultiError, or nil if none found.
+func (m *MyAuthListRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *MyAuthListRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return MyAuthListRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// MyAuthListRequestMultiError is an error wrapping multiple validation errors
+// returned by MyAuthListRequest.ValidateAll() if the designated constraints
+// aren't met.
+type MyAuthListRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m MyAuthListRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m MyAuthListRequestMultiError) AllErrors() []error { return m }
+
+// MyAuthListRequestValidationError is the validation error returned by
+// MyAuthListRequest.Validate if the designated constraints aren't met.
+type MyAuthListRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e MyAuthListRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e MyAuthListRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e MyAuthListRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e MyAuthListRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e MyAuthListRequestValidationError) ErrorName() string {
+	return "MyAuthListRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e MyAuthListRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sMyAuthListRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = MyAuthListRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = MyAuthListRequestValidationError{}
+
+// Validate checks the field values on MyAuthListReply with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *MyAuthListReply) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on MyAuthListReply with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// MyAuthListReplyMultiError, or nil if none found.
+func (m *MyAuthListReply) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *MyAuthListReply) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetAuth() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, MyAuthListReplyValidationError{
+						field:  fmt.Sprintf("Auth[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, MyAuthListReplyValidationError{
+						field:  fmt.Sprintf("Auth[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return MyAuthListReplyValidationError{
+					field:  fmt.Sprintf("Auth[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return MyAuthListReplyMultiError(errors)
+	}
+
+	return nil
+}
+
+// MyAuthListReplyMultiError is an error wrapping multiple validation errors
+// returned by MyAuthListReply.ValidateAll() if the designated constraints
+// aren't met.
+type MyAuthListReplyMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m MyAuthListReplyMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m MyAuthListReplyMultiError) AllErrors() []error { return m }
+
+// MyAuthListReplyValidationError is the validation error returned by
+// MyAuthListReply.Validate if the designated constraints aren't met.
+type MyAuthListReplyValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e MyAuthListReplyValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e MyAuthListReplyValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e MyAuthListReplyValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e MyAuthListReplyValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e MyAuthListReplyValidationError) ErrorName() string { return "MyAuthListReplyValidationError" }
+
+// Error satisfies the builtin error interface
+func (e MyAuthListReplyValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sMyAuthListReply.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = MyAuthListReplyValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = MyAuthListReplyValidationError{}
+
 // Validate checks the field values on AdminConfigUpdateRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -4906,6 +5850,1171 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = AdminConfigUpdateReplyValidationError{}
+
+// Validate checks the field values on AuthAdminCreateRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *AuthAdminCreateRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AuthAdminCreateRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// AuthAdminCreateRequestMultiError, or nil if none found.
+func (m *AuthAdminCreateRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AuthAdminCreateRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetSendBody()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, AuthAdminCreateRequestValidationError{
+					field:  "SendBody",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, AuthAdminCreateRequestValidationError{
+					field:  "SendBody",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetSendBody()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return AuthAdminCreateRequestValidationError{
+				field:  "SendBody",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return AuthAdminCreateRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// AuthAdminCreateRequestMultiError is an error wrapping multiple validation
+// errors returned by AuthAdminCreateRequest.ValidateAll() if the designated
+// constraints aren't met.
+type AuthAdminCreateRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AuthAdminCreateRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AuthAdminCreateRequestMultiError) AllErrors() []error { return m }
+
+// AuthAdminCreateRequestValidationError is the validation error returned by
+// AuthAdminCreateRequest.Validate if the designated constraints aren't met.
+type AuthAdminCreateRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AuthAdminCreateRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AuthAdminCreateRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AuthAdminCreateRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AuthAdminCreateRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AuthAdminCreateRequestValidationError) ErrorName() string {
+	return "AuthAdminCreateRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e AuthAdminCreateRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAuthAdminCreateRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AuthAdminCreateRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AuthAdminCreateRequestValidationError{}
+
+// Validate checks the field values on AuthAdminCreateReply with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *AuthAdminCreateReply) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AuthAdminCreateReply with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// AuthAdminCreateReplyMultiError, or nil if none found.
+func (m *AuthAdminCreateReply) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AuthAdminCreateReply) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return AuthAdminCreateReplyMultiError(errors)
+	}
+
+	return nil
+}
+
+// AuthAdminCreateReplyMultiError is an error wrapping multiple validation
+// errors returned by AuthAdminCreateReply.ValidateAll() if the designated
+// constraints aren't met.
+type AuthAdminCreateReplyMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AuthAdminCreateReplyMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AuthAdminCreateReplyMultiError) AllErrors() []error { return m }
+
+// AuthAdminCreateReplyValidationError is the validation error returned by
+// AuthAdminCreateReply.Validate if the designated constraints aren't met.
+type AuthAdminCreateReplyValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AuthAdminCreateReplyValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AuthAdminCreateReplyValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AuthAdminCreateReplyValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AuthAdminCreateReplyValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AuthAdminCreateReplyValidationError) ErrorName() string {
+	return "AuthAdminCreateReplyValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e AuthAdminCreateReplyValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAuthAdminCreateReply.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AuthAdminCreateReplyValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AuthAdminCreateReplyValidationError{}
+
+// Validate checks the field values on AuthAdminDeleteRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *AuthAdminDeleteRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AuthAdminDeleteRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// AuthAdminDeleteRequestMultiError, or nil if none found.
+func (m *AuthAdminDeleteRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AuthAdminDeleteRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetSendBody()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, AuthAdminDeleteRequestValidationError{
+					field:  "SendBody",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, AuthAdminDeleteRequestValidationError{
+					field:  "SendBody",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetSendBody()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return AuthAdminDeleteRequestValidationError{
+				field:  "SendBody",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return AuthAdminDeleteRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// AuthAdminDeleteRequestMultiError is an error wrapping multiple validation
+// errors returned by AuthAdminDeleteRequest.ValidateAll() if the designated
+// constraints aren't met.
+type AuthAdminDeleteRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AuthAdminDeleteRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AuthAdminDeleteRequestMultiError) AllErrors() []error { return m }
+
+// AuthAdminDeleteRequestValidationError is the validation error returned by
+// AuthAdminDeleteRequest.Validate if the designated constraints aren't met.
+type AuthAdminDeleteRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AuthAdminDeleteRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AuthAdminDeleteRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AuthAdminDeleteRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AuthAdminDeleteRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AuthAdminDeleteRequestValidationError) ErrorName() string {
+	return "AuthAdminDeleteRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e AuthAdminDeleteRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAuthAdminDeleteRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AuthAdminDeleteRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AuthAdminDeleteRequestValidationError{}
+
+// Validate checks the field values on AuthAdminDeleteReply with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *AuthAdminDeleteReply) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AuthAdminDeleteReply with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// AuthAdminDeleteReplyMultiError, or nil if none found.
+func (m *AuthAdminDeleteReply) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AuthAdminDeleteReply) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return AuthAdminDeleteReplyMultiError(errors)
+	}
+
+	return nil
+}
+
+// AuthAdminDeleteReplyMultiError is an error wrapping multiple validation
+// errors returned by AuthAdminDeleteReply.ValidateAll() if the designated
+// constraints aren't met.
+type AuthAdminDeleteReplyMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AuthAdminDeleteReplyMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AuthAdminDeleteReplyMultiError) AllErrors() []error { return m }
+
+// AuthAdminDeleteReplyValidationError is the validation error returned by
+// AuthAdminDeleteReply.Validate if the designated constraints aren't met.
+type AuthAdminDeleteReplyValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AuthAdminDeleteReplyValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AuthAdminDeleteReplyValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AuthAdminDeleteReplyValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AuthAdminDeleteReplyValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AuthAdminDeleteReplyValidationError) ErrorName() string {
+	return "AuthAdminDeleteReplyValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e AuthAdminDeleteReplyValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAuthAdminDeleteReply.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AuthAdminDeleteReplyValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AuthAdminDeleteReplyValidationError{}
+
+// Validate checks the field values on AdminLoginRequest with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *AdminLoginRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AdminLoginRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// AdminLoginRequestMultiError, or nil if none found.
+func (m *AdminLoginRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AdminLoginRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetSendBody()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, AdminLoginRequestValidationError{
+					field:  "SendBody",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, AdminLoginRequestValidationError{
+					field:  "SendBody",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetSendBody()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return AdminLoginRequestValidationError{
+				field:  "SendBody",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return AdminLoginRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// AdminLoginRequestMultiError is an error wrapping multiple validation errors
+// returned by AdminLoginRequest.ValidateAll() if the designated constraints
+// aren't met.
+type AdminLoginRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AdminLoginRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AdminLoginRequestMultiError) AllErrors() []error { return m }
+
+// AdminLoginRequestValidationError is the validation error returned by
+// AdminLoginRequest.Validate if the designated constraints aren't met.
+type AdminLoginRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AdminLoginRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AdminLoginRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AdminLoginRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AdminLoginRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AdminLoginRequestValidationError) ErrorName() string {
+	return "AdminLoginRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e AdminLoginRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAdminLoginRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AdminLoginRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AdminLoginRequestValidationError{}
+
+// Validate checks the field values on AdminLoginReply with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *AdminLoginReply) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AdminLoginReply with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// AdminLoginReplyMultiError, or nil if none found.
+func (m *AdminLoginReply) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AdminLoginReply) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Token
+
+	if len(errors) > 0 {
+		return AdminLoginReplyMultiError(errors)
+	}
+
+	return nil
+}
+
+// AdminLoginReplyMultiError is an error wrapping multiple validation errors
+// returned by AdminLoginReply.ValidateAll() if the designated constraints
+// aren't met.
+type AdminLoginReplyMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AdminLoginReplyMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AdminLoginReplyMultiError) AllErrors() []error { return m }
+
+// AdminLoginReplyValidationError is the validation error returned by
+// AdminLoginReply.Validate if the designated constraints aren't met.
+type AdminLoginReplyValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AdminLoginReplyValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AdminLoginReplyValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AdminLoginReplyValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AdminLoginReplyValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AdminLoginReplyValidationError) ErrorName() string { return "AdminLoginReplyValidationError" }
+
+// Error satisfies the builtin error interface
+func (e AdminLoginReplyValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAdminLoginReply.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AdminLoginReplyValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AdminLoginReplyValidationError{}
+
+// Validate checks the field values on AdminChangePasswordRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *AdminChangePasswordRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AdminChangePasswordRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// AdminChangePasswordRequestMultiError, or nil if none found.
+func (m *AdminChangePasswordRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AdminChangePasswordRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetSendBody()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, AdminChangePasswordRequestValidationError{
+					field:  "SendBody",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, AdminChangePasswordRequestValidationError{
+					field:  "SendBody",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetSendBody()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return AdminChangePasswordRequestValidationError{
+				field:  "SendBody",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return AdminChangePasswordRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// AdminChangePasswordRequestMultiError is an error wrapping multiple
+// validation errors returned by AdminChangePasswordRequest.ValidateAll() if
+// the designated constraints aren't met.
+type AdminChangePasswordRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AdminChangePasswordRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AdminChangePasswordRequestMultiError) AllErrors() []error { return m }
+
+// AdminChangePasswordRequestValidationError is the validation error returned
+// by AdminChangePasswordRequest.Validate if the designated constraints aren't met.
+type AdminChangePasswordRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AdminChangePasswordRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AdminChangePasswordRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AdminChangePasswordRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AdminChangePasswordRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AdminChangePasswordRequestValidationError) ErrorName() string {
+	return "AdminChangePasswordRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e AdminChangePasswordRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAdminChangePasswordRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AdminChangePasswordRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AdminChangePasswordRequestValidationError{}
+
+// Validate checks the field values on AdminChangePasswordReply with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *AdminChangePasswordReply) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AdminChangePasswordReply with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// AdminChangePasswordReplyMultiError, or nil if none found.
+func (m *AdminChangePasswordReply) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AdminChangePasswordReply) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return AdminChangePasswordReplyMultiError(errors)
+	}
+
+	return nil
+}
+
+// AdminChangePasswordReplyMultiError is an error wrapping multiple validation
+// errors returned by AdminChangePasswordReply.ValidateAll() if the designated
+// constraints aren't met.
+type AdminChangePasswordReplyMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AdminChangePasswordReplyMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AdminChangePasswordReplyMultiError) AllErrors() []error { return m }
+
+// AdminChangePasswordReplyValidationError is the validation error returned by
+// AdminChangePasswordReply.Validate if the designated constraints aren't met.
+type AdminChangePasswordReplyValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AdminChangePasswordReplyValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AdminChangePasswordReplyValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AdminChangePasswordReplyValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AdminChangePasswordReplyValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AdminChangePasswordReplyValidationError) ErrorName() string {
+	return "AdminChangePasswordReplyValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e AdminChangePasswordReplyValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAdminChangePasswordReply.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AdminChangePasswordReplyValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AdminChangePasswordReplyValidationError{}
+
+// Validate checks the field values on AdminCreateAccountRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *AdminCreateAccountRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AdminCreateAccountRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// AdminCreateAccountRequestMultiError, or nil if none found.
+func (m *AdminCreateAccountRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AdminCreateAccountRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetSendBody()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, AdminCreateAccountRequestValidationError{
+					field:  "SendBody",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, AdminCreateAccountRequestValidationError{
+					field:  "SendBody",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetSendBody()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return AdminCreateAccountRequestValidationError{
+				field:  "SendBody",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return AdminCreateAccountRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// AdminCreateAccountRequestMultiError is an error wrapping multiple validation
+// errors returned by AdminCreateAccountRequest.ValidateAll() if the
+// designated constraints aren't met.
+type AdminCreateAccountRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AdminCreateAccountRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AdminCreateAccountRequestMultiError) AllErrors() []error { return m }
+
+// AdminCreateAccountRequestValidationError is the validation error returned by
+// AdminCreateAccountRequest.Validate if the designated constraints aren't met.
+type AdminCreateAccountRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AdminCreateAccountRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AdminCreateAccountRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AdminCreateAccountRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AdminCreateAccountRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AdminCreateAccountRequestValidationError) ErrorName() string {
+	return "AdminCreateAccountRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e AdminCreateAccountRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAdminCreateAccountRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AdminCreateAccountRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AdminCreateAccountRequestValidationError{}
+
+// Validate checks the field values on AdminCreateAccountReply with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *AdminCreateAccountReply) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AdminCreateAccountReply with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// AdminCreateAccountReplyMultiError, or nil if none found.
+func (m *AdminCreateAccountReply) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AdminCreateAccountReply) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return AdminCreateAccountReplyMultiError(errors)
+	}
+
+	return nil
+}
+
+// AdminCreateAccountReplyMultiError is an error wrapping multiple validation
+// errors returned by AdminCreateAccountReply.ValidateAll() if the designated
+// constraints aren't met.
+type AdminCreateAccountReplyMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AdminCreateAccountReplyMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AdminCreateAccountReplyMultiError) AllErrors() []error { return m }
+
+// AdminCreateAccountReplyValidationError is the validation error returned by
+// AdminCreateAccountReply.Validate if the designated constraints aren't met.
+type AdminCreateAccountReplyValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AdminCreateAccountReplyValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AdminCreateAccountReplyValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AdminCreateAccountReplyValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AdminCreateAccountReplyValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AdminCreateAccountReplyValidationError) ErrorName() string {
+	return "AdminCreateAccountReplyValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e AdminCreateAccountReplyValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAdminCreateAccountReply.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AdminCreateAccountReplyValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AdminCreateAccountReplyValidationError{}
 
 // Validate checks the field values on EthAuthorizeRequest_SendBody with the
 // rules defined in the proto definition for this message. If any rules are
@@ -6462,6 +8571,436 @@ var _ interface {
 	ErrorName() string
 } = AdminConfigReply_ListValidationError{}
 
+// Validate checks the field values on AdminListReply_List with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *AdminListReply_List) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AdminListReply_List with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// AdminListReply_ListMultiError, or nil if none found.
+func (m *AdminListReply_List) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AdminListReply_List) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	// no validation rules for Account
+
+	if len(errors) > 0 {
+		return AdminListReply_ListMultiError(errors)
+	}
+
+	return nil
+}
+
+// AdminListReply_ListMultiError is an error wrapping multiple validation
+// errors returned by AdminListReply_List.ValidateAll() if the designated
+// constraints aren't met.
+type AdminListReply_ListMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AdminListReply_ListMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AdminListReply_ListMultiError) AllErrors() []error { return m }
+
+// AdminListReply_ListValidationError is the validation error returned by
+// AdminListReply_List.Validate if the designated constraints aren't met.
+type AdminListReply_ListValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AdminListReply_ListValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AdminListReply_ListValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AdminListReply_ListValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AdminListReply_ListValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AdminListReply_ListValidationError) ErrorName() string {
+	return "AdminListReply_ListValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e AdminListReply_ListValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAdminListReply_List.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AdminListReply_ListValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AdminListReply_ListValidationError{}
+
+// Validate checks the field values on AuthListReply_List with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *AuthListReply_List) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AuthListReply_List with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// AuthListReply_ListMultiError, or nil if none found.
+func (m *AuthListReply_List) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AuthListReply_List) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	// no validation rules for Name
+
+	// no validation rules for Path
+
+	if len(errors) > 0 {
+		return AuthListReply_ListMultiError(errors)
+	}
+
+	return nil
+}
+
+// AuthListReply_ListMultiError is an error wrapping multiple validation errors
+// returned by AuthListReply_List.ValidateAll() if the designated constraints
+// aren't met.
+type AuthListReply_ListMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AuthListReply_ListMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AuthListReply_ListMultiError) AllErrors() []error { return m }
+
+// AuthListReply_ListValidationError is the validation error returned by
+// AuthListReply_List.Validate if the designated constraints aren't met.
+type AuthListReply_ListValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AuthListReply_ListValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AuthListReply_ListValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AuthListReply_ListValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AuthListReply_ListValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AuthListReply_ListValidationError) ErrorName() string {
+	return "AuthListReply_ListValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e AuthListReply_ListValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAuthListReply_List.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AuthListReply_ListValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AuthListReply_ListValidationError{}
+
+// Validate checks the field values on UserAuthListReply_List with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UserAuthListReply_List) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UserAuthListReply_List with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UserAuthListReply_ListMultiError, or nil if none found.
+func (m *UserAuthListReply_List) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UserAuthListReply_List) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	// no validation rules for Name
+
+	// no validation rules for Path
+
+	if len(errors) > 0 {
+		return UserAuthListReply_ListMultiError(errors)
+	}
+
+	return nil
+}
+
+// UserAuthListReply_ListMultiError is an error wrapping multiple validation
+// errors returned by UserAuthListReply_List.ValidateAll() if the designated
+// constraints aren't met.
+type UserAuthListReply_ListMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UserAuthListReply_ListMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UserAuthListReply_ListMultiError) AllErrors() []error { return m }
+
+// UserAuthListReply_ListValidationError is the validation error returned by
+// UserAuthListReply_List.Validate if the designated constraints aren't met.
+type UserAuthListReply_ListValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UserAuthListReply_ListValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UserAuthListReply_ListValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UserAuthListReply_ListValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UserAuthListReply_ListValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UserAuthListReply_ListValidationError) ErrorName() string {
+	return "UserAuthListReply_ListValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UserAuthListReply_ListValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUserAuthListReply_List.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UserAuthListReply_ListValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UserAuthListReply_ListValidationError{}
+
+// Validate checks the field values on MyAuthListReply_List with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *MyAuthListReply_List) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on MyAuthListReply_List with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// MyAuthListReply_ListMultiError, or nil if none found.
+func (m *MyAuthListReply_List) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *MyAuthListReply_List) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	// no validation rules for Name
+
+	// no validation rules for Path
+
+	if len(errors) > 0 {
+		return MyAuthListReply_ListMultiError(errors)
+	}
+
+	return nil
+}
+
+// MyAuthListReply_ListMultiError is an error wrapping multiple validation
+// errors returned by MyAuthListReply_List.ValidateAll() if the designated
+// constraints aren't met.
+type MyAuthListReply_ListMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m MyAuthListReply_ListMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m MyAuthListReply_ListMultiError) AllErrors() []error { return m }
+
+// MyAuthListReply_ListValidationError is the validation error returned by
+// MyAuthListReply_List.Validate if the designated constraints aren't met.
+type MyAuthListReply_ListValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e MyAuthListReply_ListValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e MyAuthListReply_ListValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e MyAuthListReply_ListValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e MyAuthListReply_ListValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e MyAuthListReply_ListValidationError) ErrorName() string {
+	return "MyAuthListReply_ListValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e MyAuthListReply_ListValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sMyAuthListReply_List.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = MyAuthListReply_ListValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = MyAuthListReply_ListValidationError{}
+
 // Validate checks the field values on AdminConfigUpdateRequest_SendBody with
 // the rules defined in the proto definition for this message. If any rules
 // are violated, the first error encountered is returned, or nil if there are
@@ -6570,3 +9109,541 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = AdminConfigUpdateRequest_SendBodyValidationError{}
+
+// Validate checks the field values on AuthAdminCreateRequest_SendBody with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *AuthAdminCreateRequest_SendBody) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AuthAdminCreateRequest_SendBody with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// AuthAdminCreateRequest_SendBodyMultiError, or nil if none found.
+func (m *AuthAdminCreateRequest_SendBody) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AuthAdminCreateRequest_SendBody) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for AdminId
+
+	// no validation rules for AuthId
+
+	if len(errors) > 0 {
+		return AuthAdminCreateRequest_SendBodyMultiError(errors)
+	}
+
+	return nil
+}
+
+// AuthAdminCreateRequest_SendBodyMultiError is an error wrapping multiple
+// validation errors returned by AuthAdminCreateRequest_SendBody.ValidateAll()
+// if the designated constraints aren't met.
+type AuthAdminCreateRequest_SendBodyMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AuthAdminCreateRequest_SendBodyMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AuthAdminCreateRequest_SendBodyMultiError) AllErrors() []error { return m }
+
+// AuthAdminCreateRequest_SendBodyValidationError is the validation error
+// returned by AuthAdminCreateRequest_SendBody.Validate if the designated
+// constraints aren't met.
+type AuthAdminCreateRequest_SendBodyValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AuthAdminCreateRequest_SendBodyValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AuthAdminCreateRequest_SendBodyValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AuthAdminCreateRequest_SendBodyValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AuthAdminCreateRequest_SendBodyValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AuthAdminCreateRequest_SendBodyValidationError) ErrorName() string {
+	return "AuthAdminCreateRequest_SendBodyValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e AuthAdminCreateRequest_SendBodyValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAuthAdminCreateRequest_SendBody.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AuthAdminCreateRequest_SendBodyValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AuthAdminCreateRequest_SendBodyValidationError{}
+
+// Validate checks the field values on AuthAdminDeleteRequest_SendBody with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *AuthAdminDeleteRequest_SendBody) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AuthAdminDeleteRequest_SendBody with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// AuthAdminDeleteRequest_SendBodyMultiError, or nil if none found.
+func (m *AuthAdminDeleteRequest_SendBody) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AuthAdminDeleteRequest_SendBody) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for AdminId
+
+	// no validation rules for AuthId
+
+	if len(errors) > 0 {
+		return AuthAdminDeleteRequest_SendBodyMultiError(errors)
+	}
+
+	return nil
+}
+
+// AuthAdminDeleteRequest_SendBodyMultiError is an error wrapping multiple
+// validation errors returned by AuthAdminDeleteRequest_SendBody.ValidateAll()
+// if the designated constraints aren't met.
+type AuthAdminDeleteRequest_SendBodyMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AuthAdminDeleteRequest_SendBodyMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AuthAdminDeleteRequest_SendBodyMultiError) AllErrors() []error { return m }
+
+// AuthAdminDeleteRequest_SendBodyValidationError is the validation error
+// returned by AuthAdminDeleteRequest_SendBody.Validate if the designated
+// constraints aren't met.
+type AuthAdminDeleteRequest_SendBodyValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AuthAdminDeleteRequest_SendBodyValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AuthAdminDeleteRequest_SendBodyValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AuthAdminDeleteRequest_SendBodyValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AuthAdminDeleteRequest_SendBodyValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AuthAdminDeleteRequest_SendBodyValidationError) ErrorName() string {
+	return "AuthAdminDeleteRequest_SendBodyValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e AuthAdminDeleteRequest_SendBodyValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAuthAdminDeleteRequest_SendBody.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AuthAdminDeleteRequest_SendBodyValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AuthAdminDeleteRequest_SendBodyValidationError{}
+
+// Validate checks the field values on AdminLoginRequest_SendBody with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *AdminLoginRequest_SendBody) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AdminLoginRequest_SendBody with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// AdminLoginRequest_SendBodyMultiError, or nil if none found.
+func (m *AdminLoginRequest_SendBody) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AdminLoginRequest_SendBody) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Account
+
+	// no validation rules for Password
+
+	if len(errors) > 0 {
+		return AdminLoginRequest_SendBodyMultiError(errors)
+	}
+
+	return nil
+}
+
+// AdminLoginRequest_SendBodyMultiError is an error wrapping multiple
+// validation errors returned by AdminLoginRequest_SendBody.ValidateAll() if
+// the designated constraints aren't met.
+type AdminLoginRequest_SendBodyMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AdminLoginRequest_SendBodyMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AdminLoginRequest_SendBodyMultiError) AllErrors() []error { return m }
+
+// AdminLoginRequest_SendBodyValidationError is the validation error returned
+// by AdminLoginRequest_SendBody.Validate if the designated constraints aren't met.
+type AdminLoginRequest_SendBodyValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AdminLoginRequest_SendBodyValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AdminLoginRequest_SendBodyValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AdminLoginRequest_SendBodyValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AdminLoginRequest_SendBodyValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AdminLoginRequest_SendBodyValidationError) ErrorName() string {
+	return "AdminLoginRequest_SendBodyValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e AdminLoginRequest_SendBodyValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAdminLoginRequest_SendBody.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AdminLoginRequest_SendBodyValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AdminLoginRequest_SendBodyValidationError{}
+
+// Validate checks the field values on AdminChangePasswordRequest_SendBody with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *AdminChangePasswordRequest_SendBody) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AdminChangePasswordRequest_SendBody
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// AdminChangePasswordRequest_SendBodyMultiError, or nil if none found.
+func (m *AdminChangePasswordRequest_SendBody) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AdminChangePasswordRequest_SendBody) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Account
+
+	// no validation rules for Password
+
+	if len(errors) > 0 {
+		return AdminChangePasswordRequest_SendBodyMultiError(errors)
+	}
+
+	return nil
+}
+
+// AdminChangePasswordRequest_SendBodyMultiError is an error wrapping multiple
+// validation errors returned by
+// AdminChangePasswordRequest_SendBody.ValidateAll() if the designated
+// constraints aren't met.
+type AdminChangePasswordRequest_SendBodyMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AdminChangePasswordRequest_SendBodyMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AdminChangePasswordRequest_SendBodyMultiError) AllErrors() []error { return m }
+
+// AdminChangePasswordRequest_SendBodyValidationError is the validation error
+// returned by AdminChangePasswordRequest_SendBody.Validate if the designated
+// constraints aren't met.
+type AdminChangePasswordRequest_SendBodyValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AdminChangePasswordRequest_SendBodyValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AdminChangePasswordRequest_SendBodyValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AdminChangePasswordRequest_SendBodyValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AdminChangePasswordRequest_SendBodyValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AdminChangePasswordRequest_SendBodyValidationError) ErrorName() string {
+	return "AdminChangePasswordRequest_SendBodyValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e AdminChangePasswordRequest_SendBodyValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAdminChangePasswordRequest_SendBody.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AdminChangePasswordRequest_SendBodyValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AdminChangePasswordRequest_SendBodyValidationError{}
+
+// Validate checks the field values on AdminCreateAccountRequest_SendBody with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *AdminCreateAccountRequest_SendBody) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AdminCreateAccountRequest_SendBody
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// AdminCreateAccountRequest_SendBodyMultiError, or nil if none found.
+func (m *AdminCreateAccountRequest_SendBody) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AdminCreateAccountRequest_SendBody) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Account
+
+	// no validation rules for Password
+
+	if len(errors) > 0 {
+		return AdminCreateAccountRequest_SendBodyMultiError(errors)
+	}
+
+	return nil
+}
+
+// AdminCreateAccountRequest_SendBodyMultiError is an error wrapping multiple
+// validation errors returned by
+// AdminCreateAccountRequest_SendBody.ValidateAll() if the designated
+// constraints aren't met.
+type AdminCreateAccountRequest_SendBodyMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AdminCreateAccountRequest_SendBodyMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AdminCreateAccountRequest_SendBodyMultiError) AllErrors() []error { return m }
+
+// AdminCreateAccountRequest_SendBodyValidationError is the validation error
+// returned by AdminCreateAccountRequest_SendBody.Validate if the designated
+// constraints aren't met.
+type AdminCreateAccountRequest_SendBodyValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AdminCreateAccountRequest_SendBodyValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AdminCreateAccountRequest_SendBodyValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AdminCreateAccountRequest_SendBodyValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AdminCreateAccountRequest_SendBodyValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AdminCreateAccountRequest_SendBodyValidationError) ErrorName() string {
+	return "AdminCreateAccountRequest_SendBodyValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e AdminCreateAccountRequest_SendBodyValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAdminCreateAccountRequest_SendBody.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AdminCreateAccountRequest_SendBodyValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AdminCreateAccountRequest_SendBodyValidationError{}
