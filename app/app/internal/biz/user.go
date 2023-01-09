@@ -1265,7 +1265,7 @@ func (uuc *UserUseCase) MyAuthList(ctx context.Context, req *v1.MyAuthListReques
 		authIds = append(authIds, v.AuthId)
 	}
 
-	if 0 < len(authIds) {
+	if 0 >= len(authIds) {
 		return res, nil
 	}
 
