@@ -1057,12 +1057,19 @@ func (uuc *UserUseCase) AdminConfigUpdate(ctx context.Context, req *v1.AdminConf
 
 func (uuc *UserUseCase) UpdateUser(ctx context.Context, req *v1.UpdateUserRequest) (*v1.UpdateUserReply, error) {
 	var (
-		err error
+		err  error
+		undo int64
 	)
 
 	res := &v1.UpdateUserReply{}
 
-	_, err = uuc.repo.UndoUser(ctx, req.SendBody.UserId, req.SendBody.Undo)
+	if 0 == req.SendBody.Undo {
+		undo = 0
+	} else {
+		undo = 1
+	}
+
+	_, err = uuc.repo.UndoUser(ctx, req.SendBody.UserId, undo)
 	if nil != err {
 		return res, err
 	}
