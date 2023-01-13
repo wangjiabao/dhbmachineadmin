@@ -555,9 +555,7 @@ func (u *UserRepo) CreateUser(ctx context.Context, uc *biz.User) (*biz.User, err
 
 // UndoUser .
 func (u *UserRepo) UndoUser(ctx context.Context, userId int64, undo int64) (bool, error) {
-	var user User
-	user.Undo = undo
-	res := u.data.DB(ctx).Table("user").Where("id=?", userId).Updates(&user)
+	res := u.data.DB(ctx).Table("user").Where("id=?", userId).Updates(map[string]interface{}{"undo": undo})
 	if res.Error != nil {
 		return false, errors.New(500, "CREATE_USER_ERROR", "用户修改失败")
 	}
