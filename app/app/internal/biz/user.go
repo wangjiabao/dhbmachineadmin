@@ -1063,10 +1063,10 @@ func (uuc *UserUseCase) UpdateUser(ctx context.Context, req *v1.UpdateUserReques
 
 	res := &v1.UpdateUserReply{}
 
-	if 0 == req.SendBody.Undo {
-		undo = 0
-	} else {
+	if 1 == req.SendBody.Undo {
 		undo = 1
+	} else {
+		undo = 0
 	}
 
 	_, err = uuc.repo.UndoUser(ctx, req.SendBody.UserId, undo)
