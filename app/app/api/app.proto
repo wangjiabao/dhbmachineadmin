@@ -370,6 +370,7 @@ message AdminUserListReply {
 		int64 vip = 5;
 		int64 monthRecommend = 7;
 		int64 historyRecommend = 6;
+		int64 undo = 9;
 	}
 	int64 count = 2;
 }

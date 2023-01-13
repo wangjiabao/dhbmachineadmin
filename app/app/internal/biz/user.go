@@ -19,6 +19,7 @@ import (
 type User struct {
 	ID        int64
 	Address   string
+	Undo      int64
 	CreatedAt time.Time
 }
 
@@ -815,6 +816,7 @@ func (uuc *UserUseCase) AdminUserList(ctx context.Context, req *v1.AdminUserList
 			Vip:              userInfos[v.ID].Vip,
 			MonthRecommend:   tmpCount,
 			HistoryRecommend: userInfos[v.ID].HistoryRecommend,
+			Undo:             v.Undo,
 		})
 	}
 

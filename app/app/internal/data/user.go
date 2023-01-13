@@ -531,6 +531,7 @@ func (u *UserRepo) GetUsers(ctx context.Context, b *biz.Pagination, address stri
 		res = append(res, &biz.User{
 			ID:        item.ID,
 			Address:   item.Address,
+			Undo:      item.Undo,
 			CreatedAt: item.CreatedAt,
 		})
 	}

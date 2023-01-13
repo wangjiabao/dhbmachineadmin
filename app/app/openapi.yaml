@@ -898,6 +898,9 @@ components:
                 historyRecommend:
                     type: integer
                     format: int64
+                undo:
+                    type: integer
+                    format: int64
         AdminUserRecommendReply:
             type: object
             properties:

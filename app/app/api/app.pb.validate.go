@@ -8155,6 +8155,8 @@ func (m *AdminUserListReply_UserList) validate(all bool) error {
 
 	// no validation rules for HistoryRecommend
 
+	// no validation rules for Undo
+
 	if len(errors) > 0 {
 		return AdminUserListReply_UserListMultiError(errors)
 	}
