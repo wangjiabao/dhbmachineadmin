@@ -154,6 +154,13 @@ service App {
 		};
 	};
 
+	rpc UpdateUser (UpdateUserRequest) returns (UpdateUserReply) {
+		option (google.api.http) = {
+			post: "/api/admin_dhb/update_user"
+			body: "send_body"
+		};
+	};
+
 	rpc AdminChangePassword (AdminChangePasswordRequest) returns (AdminChangePasswordReply) {
 		option (google.api.http) = {
 			post: "/api/admin_dhb/change_password"
@@ -608,5 +615,18 @@ message AdminCreateAccountRequest {
 }
 
 message AdminCreateAccountReply {
+
+}
+
+message UpdateUserRequest {
+	message SendBody{
+		int64 user_id = 1;
+		int64 undo = 2;
+	}
+
+	SendBody send_body = 1;
+}
+
+message UpdateUserReply {
 
 }

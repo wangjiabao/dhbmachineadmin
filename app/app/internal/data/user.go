@@ -13,6 +13,7 @@ import (
 type User struct {
 	ID        int64     `gorm:"primarykey;type:int"`
 	Address   string    `gorm:"type:varchar(100)"`
+	Undo      int64     `gorm:"type:int;not null"`
 	CreatedAt time.Time `gorm:"type:datetime;not null"`
 	UpdatedAt time.Time `gorm:"type:datetime;not null"`
 }
@@ -549,6 +550,18 @@ func (u *UserRepo) CreateUser(ctx context.Context, uc *biz.User) (*biz.User, err
 		ID:      user.ID,
 		Address: user.Address,
 	}, nil
+}
+
+// UndoUser .
+func (u *UserRepo) UndoUser(ctx context.Context, userId int64, undo int64) (bool, error) {
+	var user User
+	user.Undo = undo
+	res := u.data.DB(ctx).Table("user").Where("id=?", userId).Updates(&user)
+	if res.Error != nil {
+		return false, errors.New(500, "CREATE_USER_ERROR", "用户修改失败")
+	}
+
+	return true, nil
 }
 
 // CreateAdmin .

@@ -193,6 +193,7 @@ type UserRepo interface {
 	GetUserByAddress(ctx context.Context, address string) (*User, error)
 	CreateUser(ctx context.Context, user *User) (*User, error)
 	CreateAdmin(ctx context.Context, a *Admin) (*Admin, error)
+	UndoUser(ctx context.Context, userId int64, undo int64) (bool, error)
 	GetUserByUserIds(ctx context.Context, userIds ...int64) (map[int64]*User, error)
 	GetAdmins(ctx context.Context) ([]*Admin, error)
 	GetUsers(ctx context.Context, b *Pagination, address string) ([]*User, error, int64)
@@ -1045,6 +1046,21 @@ func (uuc *UserUseCase) AdminConfigUpdate(ctx context.Context, req *v1.AdminConf
 	res := &v1.AdminConfigUpdateReply{}
 
 	_, err = uuc.configRepo.UpdateConfig(ctx, req.SendBody.Id, req.SendBody.Value)
+	if nil != err {
+		return res, err
+	}
+
+	return res, nil
+}
+
+func (uuc *UserUseCase) UpdateUser(ctx context.Context, req *v1.UpdateUserRequest) (*v1.UpdateUserReply, error) {
+	var (
+		err error
+	)
+
+	res := &v1.UpdateUserReply{}
+
+	_, err = uuc.repo.UndoUser(ctx, req.SendBody.UserId, req.SendBody.Undo)
 	if nil != err {
 		return res, err
 	}

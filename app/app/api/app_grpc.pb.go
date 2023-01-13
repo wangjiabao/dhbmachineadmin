@@ -44,6 +44,7 @@ type AppClient interface {
 	AdminConfigUpdate(ctx context.Context, in *AdminConfigUpdateRequest, opts ...grpc.CallOption) (*AdminConfigUpdateReply, error)
 	AdminLogin(ctx context.Context, in *AdminLoginRequest, opts ...grpc.CallOption) (*AdminLoginReply, error)
 	AdminCreateAccount(ctx context.Context, in *AdminCreateAccountRequest, opts ...grpc.CallOption) (*AdminCreateAccountReply, error)
+	UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*UpdateUserReply, error)
 	AdminChangePassword(ctx context.Context, in *AdminChangePasswordRequest, opts ...grpc.CallOption) (*AdminChangePasswordReply, error)
 	AdminList(ctx context.Context, in *AdminListRequest, opts ...grpc.CallOption) (*AdminListReply, error)
 	AuthList(ctx context.Context, in *AuthListRequest, opts ...grpc.CallOption) (*AuthListReply, error)
@@ -259,6 +260,15 @@ func (c *appClient) AdminCreateAccount(ctx context.Context, in *AdminCreateAccou
 	return out, nil
 }
 
+func (c *appClient) UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*UpdateUserReply, error) {
+	out := new(UpdateUserReply)
+	err := c.cc.Invoke(ctx, "/api.App/UpdateUser", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *appClient) AdminChangePassword(ctx context.Context, in *AdminChangePasswordRequest, opts ...grpc.CallOption) (*AdminChangePasswordReply, error) {
 	out := new(AdminChangePasswordReply)
 	err := c.cc.Invoke(ctx, "/api.App/AdminChangePassword", in, out, opts...)
@@ -348,6 +358,7 @@ type AppServer interface {
 	AdminConfigUpdate(context.Context, *AdminConfigUpdateRequest) (*AdminConfigUpdateReply, error)
 	AdminLogin(context.Context, *AdminLoginRequest) (*AdminLoginReply, error)
 	AdminCreateAccount(context.Context, *AdminCreateAccountRequest) (*AdminCreateAccountReply, error)
+	UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserReply, error)
 	AdminChangePassword(context.Context, *AdminChangePasswordRequest) (*AdminChangePasswordReply, error)
 	AdminList(context.Context, *AdminListRequest) (*AdminListReply, error)
 	AuthList(context.Context, *AuthListRequest) (*AuthListReply, error)
@@ -427,6 +438,9 @@ func (UnimplementedAppServer) AdminLogin(context.Context, *AdminLoginRequest) (*
 }
 func (UnimplementedAppServer) AdminCreateAccount(context.Context, *AdminCreateAccountRequest) (*AdminCreateAccountReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AdminCreateAccount not implemented")
+}
+func (UnimplementedAppServer) UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateUser not implemented")
 }
 func (UnimplementedAppServer) AdminChangePassword(context.Context, *AdminChangePasswordRequest) (*AdminChangePasswordReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AdminChangePassword not implemented")
@@ -858,6 +872,24 @@ func _App_AdminCreateAccount_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _App_UpdateUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateUserRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppServer).UpdateUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.App/UpdateUser",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppServer).UpdateUser(ctx, req.(*UpdateUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _App_AdminChangePassword_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(AdminChangePasswordRequest)
 	if err := dec(in); err != nil {
@@ -1078,6 +1110,10 @@ var App_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "AdminCreateAccount",
 			Handler:    _App_AdminCreateAccount_Handler,
+		},
+		{
+			MethodName: "UpdateUser",
+			Handler:    _App_UpdateUser_Handler,
 		},
 		{
 			MethodName: "AdminChangePassword",

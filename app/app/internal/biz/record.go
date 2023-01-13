@@ -219,15 +219,15 @@ func (ruc *RecordUseCase) EthUserRecordHandle(ctx context.Context, ethUserRecord
 		}
 
 		// todo
-		if "100000000000000000000" == v.Amount {
+		if "75000000000000000000" == v.Amount { // 100
 			locationCurrentLevel = 1
 			locationCurrentMax = 5000000000000
 			currentValue = 1000000000000
-		} else if "200000000000000000000" == v.Amount {
+		} else if "150000000000000000000" == v.Amount { // 200
 			locationCurrentLevel = 2
 			locationCurrentMax = 10000000000000
 			currentValue = 2000000000000
-		} else if "500000000000000000000" == v.Amount {
+		} else if "375000000000000000000" == v.Amount { // 500
 			locationCurrentLevel = 3
 			locationCurrentMax = 25000000000000
 			currentValue = 5000000000000

@@ -44,6 +44,7 @@ const OperationAppMyAuthList = "/api.App/MyAuthList"
 const OperationAppRecommendList = "/api.App/RecommendList"
 const OperationAppRecommendRewardList = "/api.App/RecommendRewardList"
 const OperationAppRewardList = "/api.App/RewardList"
+const OperationAppUpdateUser = "/api.App/UpdateUser"
 const OperationAppUserAuthList = "/api.App/UserAuthList"
 const OperationAppUserInfo = "/api.App/UserInfo"
 const OperationAppWithdraw = "/api.App/Withdraw"
@@ -75,6 +76,7 @@ type AppHTTPServer interface {
 	RecommendList(context.Context, *RecommendListRequest) (*RecommendListReply, error)
 	RecommendRewardList(context.Context, *RecommendRewardListRequest) (*RecommendRewardListReply, error)
 	RewardList(context.Context, *RewardListRequest) (*RewardListReply, error)
+	UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserReply, error)
 	UserAuthList(context.Context, *UserAuthListRequest) (*UserAuthListReply, error)
 	UserInfo(context.Context, *UserInfoRequest) (*UserInfoReply, error)
 	Withdraw(context.Context, *WithdrawRequest) (*WithdrawReply, error)
@@ -105,6 +107,7 @@ func RegisterAppHTTPServer(s *http.Server, srv AppHTTPServer) {
 	r.POST("/api/admin_dhb/config_update", _App_AdminConfigUpdate0_HTTP_Handler(srv))
 	r.POST("/api/admin_dhb/login", _App_AdminLogin0_HTTP_Handler(srv))
 	r.POST("/api/admin_dhb/create_account", _App_AdminCreateAccount0_HTTP_Handler(srv))
+	r.POST("/api/admin_dhb/update_user", _App_UpdateUser0_HTTP_Handler(srv))
 	r.POST("/api/admin_dhb/change_password", _App_AdminChangePassword0_HTTP_Handler(srv))
 	r.GET("/api/admin_dhb/admin_list", _App_AdminList0_HTTP_Handler(srv))
 	r.GET("/api/admin_dhb/auth_list", _App_AuthList0_HTTP_Handler(srv))
@@ -544,6 +547,28 @@ func _App_AdminCreateAccount0_HTTP_Handler(srv AppHTTPServer) func(ctx http.Cont
 	}
 }
 
+func _App_UpdateUser0_HTTP_Handler(srv AppHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in UpdateUserRequest
+		if err := ctx.Bind(&in.SendBody); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationAppUpdateUser)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.UpdateUser(ctx, req.(*UpdateUserRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*UpdateUserReply)
+		return ctx.Result(200, reply)
+	}
+}
+
 func _App_AdminChangePassword0_HTTP_Handler(srv AppHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in AdminChangePasswordRequest
@@ -712,6 +737,7 @@ type AppHTTPClient interface {
 	RecommendList(ctx context.Context, req *RecommendListRequest, opts ...http.CallOption) (rsp *RecommendListReply, err error)
 	RecommendRewardList(ctx context.Context, req *RecommendRewardListRequest, opts ...http.CallOption) (rsp *RecommendRewardListReply, err error)
 	RewardList(ctx context.Context, req *RewardListRequest, opts ...http.CallOption) (rsp *RewardListReply, err error)
+	UpdateUser(ctx context.Context, req *UpdateUserRequest, opts ...http.CallOption) (rsp *UpdateUserReply, err error)
 	UserAuthList(ctx context.Context, req *UserAuthListRequest, opts ...http.CallOption) (rsp *UserAuthListReply, err error)
 	UserInfo(ctx context.Context, req *UserInfoRequest, opts ...http.CallOption) (rsp *UserInfoReply, err error)
 	Withdraw(ctx context.Context, req *WithdrawRequest, opts ...http.CallOption) (rsp *WithdrawReply, err error)
@@ -1045,6 +1071,19 @@ func (c *AppHTTPClientImpl) RewardList(ctx context.Context, in *RewardListReques
 	opts = append(opts, http.Operation(OperationAppRewardList))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, err
+}
+
+func (c *AppHTTPClientImpl) UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...http.CallOption) (*UpdateUserReply, error) {
+	var out UpdateUserReply
+	pattern := "/api/admin_dhb/update_user"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationAppUpdateUser))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in.SendBody, &out, opts...)
 	if err != nil {
 		return nil, err
 	}

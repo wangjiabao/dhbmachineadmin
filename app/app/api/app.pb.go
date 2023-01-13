@@ -3030,6 +3030,91 @@ func (*AdminCreateAccountReply) Descriptor() ([]byte, []int) {
 	return file_api_app_proto_rawDescGZIP(), []int{59}
 }
 
+type UpdateUserRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	SendBody *UpdateUserRequest_SendBody `protobuf:"bytes,1,opt,name=send_body,json=sendBody,proto3" json:"send_body,omitempty"`
+}
+
+func (x *UpdateUserRequest) Reset() {
+	*x = UpdateUserRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_api_app_proto_msgTypes[60]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *UpdateUserRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateUserRequest) ProtoMessage() {}
+
+func (x *UpdateUserRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_app_proto_msgTypes[60]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateUserRequest.ProtoReflect.Descriptor instead.
+func (*UpdateUserRequest) Descriptor() ([]byte, []int) {
+	return file_api_app_proto_rawDescGZIP(), []int{60}
+}
+
+func (x *UpdateUserRequest) GetSendBody() *UpdateUserRequest_SendBody {
+	if x != nil {
+		return x.SendBody
+	}
+	return nil
+}
+
+type UpdateUserReply struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *UpdateUserReply) Reset() {
+	*x = UpdateUserReply{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_api_app_proto_msgTypes[61]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *UpdateUserReply) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateUserReply) ProtoMessage() {}
+
+func (x *UpdateUserReply) ProtoReflect() protoreflect.Message {
+	mi := &file_api_app_proto_msgTypes[61]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateUserReply.ProtoReflect.Descriptor instead.
+func (*UpdateUserReply) Descriptor() ([]byte, []int) {
+	return file_api_app_proto_rawDescGZIP(), []int{61}
+}
+
 type EthAuthorizeRequest_SendBody struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -3042,7 +3127,7 @@ type EthAuthorizeRequest_SendBody struct {
 func (x *EthAuthorizeRequest_SendBody) Reset() {
 	*x = EthAuthorizeRequest_SendBody{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_app_proto_msgTypes[60]
+		mi := &file_api_app_proto_msgTypes[62]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3055,7 +3140,7 @@ func (x *EthAuthorizeRequest_SendBody) String() string {
 func (*EthAuthorizeRequest_SendBody) ProtoMessage() {}
 
 func (x *EthAuthorizeRequest_SendBody) ProtoReflect() protoreflect.Message {
-	mi := &file_api_app_proto_msgTypes[60]
+	mi := &file_api_app_proto_msgTypes[62]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3099,7 +3184,7 @@ type RewardListReply_List struct {
 func (x *RewardListReply_List) Reset() {
 	*x = RewardListReply_List{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_app_proto_msgTypes[61]
+		mi := &file_api_app_proto_msgTypes[63]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3112,7 +3197,7 @@ func (x *RewardListReply_List) String() string {
 func (*RewardListReply_List) ProtoMessage() {}
 
 func (x *RewardListReply_List) ProtoReflect() protoreflect.Message {
-	mi := &file_api_app_proto_msgTypes[61]
+	mi := &file_api_app_proto_msgTypes[63]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3170,7 +3255,7 @@ type RecommendRewardListReply_List struct {
 func (x *RecommendRewardListReply_List) Reset() {
 	*x = RecommendRewardListReply_List{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_app_proto_msgTypes[62]
+		mi := &file_api_app_proto_msgTypes[64]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3183,7 +3268,7 @@ func (x *RecommendRewardListReply_List) String() string {
 func (*RecommendRewardListReply_List) ProtoMessage() {}
 
 func (x *RecommendRewardListReply_List) ProtoReflect() protoreflect.Message {
-	mi := &file_api_app_proto_msgTypes[62]
+	mi := &file_api_app_proto_msgTypes[64]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3239,7 +3324,7 @@ type FeeRewardListReply_List struct {
 func (x *FeeRewardListReply_List) Reset() {
 	*x = FeeRewardListReply_List{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_app_proto_msgTypes[63]
+		mi := &file_api_app_proto_msgTypes[65]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3252,7 +3337,7 @@ func (x *FeeRewardListReply_List) String() string {
 func (*FeeRewardListReply_List) ProtoMessage() {}
 
 func (x *FeeRewardListReply_List) ProtoReflect() protoreflect.Message {
-	mi := &file_api_app_proto_msgTypes[63]
+	mi := &file_api_app_proto_msgTypes[65]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3296,7 +3381,7 @@ type WithdrawListReply_List struct {
 func (x *WithdrawListReply_List) Reset() {
 	*x = WithdrawListReply_List{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_app_proto_msgTypes[64]
+		mi := &file_api_app_proto_msgTypes[66]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3309,7 +3394,7 @@ func (x *WithdrawListReply_List) String() string {
 func (*WithdrawListReply_List) ProtoMessage() {}
 
 func (x *WithdrawListReply_List) ProtoReflect() protoreflect.Message {
-	mi := &file_api_app_proto_msgTypes[64]
+	mi := &file_api_app_proto_msgTypes[66]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3365,7 +3450,7 @@ type RecommendListReply_List struct {
 func (x *RecommendListReply_List) Reset() {
 	*x = RecommendListReply_List{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_app_proto_msgTypes[65]
+		mi := &file_api_app_proto_msgTypes[67]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3378,7 +3463,7 @@ func (x *RecommendListReply_List) String() string {
 func (*RecommendListReply_List) ProtoMessage() {}
 
 func (x *RecommendListReply_List) ProtoReflect() protoreflect.Message {
-	mi := &file_api_app_proto_msgTypes[65]
+	mi := &file_api_app_proto_msgTypes[67]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3420,7 +3505,7 @@ type WithdrawRequest_SendBody struct {
 func (x *WithdrawRequest_SendBody) Reset() {
 	*x = WithdrawRequest_SendBody{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_app_proto_msgTypes[66]
+		mi := &file_api_app_proto_msgTypes[68]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3433,7 +3518,7 @@ func (x *WithdrawRequest_SendBody) String() string {
 func (*WithdrawRequest_SendBody) ProtoMessage() {}
 
 func (x *WithdrawRequest_SendBody) ProtoReflect() protoreflect.Message {
-	mi := &file_api_app_proto_msgTypes[66]
+	mi := &file_api_app_proto_msgTypes[68]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3478,7 +3563,7 @@ type AdminRewardListReply_List struct {
 func (x *AdminRewardListReply_List) Reset() {
 	*x = AdminRewardListReply_List{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_app_proto_msgTypes[67]
+		mi := &file_api_app_proto_msgTypes[69]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3491,7 +3576,7 @@ func (x *AdminRewardListReply_List) String() string {
 func (*AdminRewardListReply_List) ProtoMessage() {}
 
 func (x *AdminRewardListReply_List) ProtoReflect() protoreflect.Message {
-	mi := &file_api_app_proto_msgTypes[67]
+	mi := &file_api_app_proto_msgTypes[69]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3560,7 +3645,7 @@ type AdminUserListReply_UserList struct {
 func (x *AdminUserListReply_UserList) Reset() {
 	*x = AdminUserListReply_UserList{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_app_proto_msgTypes[68]
+		mi := &file_api_app_proto_msgTypes[70]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3573,7 +3658,7 @@ func (x *AdminUserListReply_UserList) String() string {
 func (*AdminUserListReply_UserList) ProtoMessage() {}
 
 func (x *AdminUserListReply_UserList) ProtoReflect() protoreflect.Message {
-	mi := &file_api_app_proto_msgTypes[68]
+	mi := &file_api_app_proto_msgTypes[70]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3663,7 +3748,7 @@ type AdminLocationListReply_LocationList struct {
 func (x *AdminLocationListReply_LocationList) Reset() {
 	*x = AdminLocationListReply_LocationList{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_app_proto_msgTypes[69]
+		mi := &file_api_app_proto_msgTypes[71]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3676,7 +3761,7 @@ func (x *AdminLocationListReply_LocationList) String() string {
 func (*AdminLocationListReply_LocationList) ProtoMessage() {}
 
 func (x *AdminLocationListReply_LocationList) ProtoReflect() protoreflect.Message {
-	mi := &file_api_app_proto_msgTypes[69]
+	mi := &file_api_app_proto_msgTypes[71]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3765,7 +3850,7 @@ type AdminWithdrawListReply_List struct {
 func (x *AdminWithdrawListReply_List) Reset() {
 	*x = AdminWithdrawListReply_List{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_app_proto_msgTypes[70]
+		mi := &file_api_app_proto_msgTypes[72]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3778,7 +3863,7 @@ func (x *AdminWithdrawListReply_List) String() string {
 func (*AdminWithdrawListReply_List) ProtoMessage() {}
 
 func (x *AdminWithdrawListReply_List) ProtoReflect() protoreflect.Message {
-	mi := &file_api_app_proto_msgTypes[70]
+	mi := &file_api_app_proto_msgTypes[72]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3857,7 +3942,7 @@ type AdminUserRecommendReply_List struct {
 func (x *AdminUserRecommendReply_List) Reset() {
 	*x = AdminUserRecommendReply_List{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_app_proto_msgTypes[71]
+		mi := &file_api_app_proto_msgTypes[73]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3870,7 +3955,7 @@ func (x *AdminUserRecommendReply_List) String() string {
 func (*AdminUserRecommendReply_List) ProtoMessage() {}
 
 func (x *AdminUserRecommendReply_List) ProtoReflect() protoreflect.Message {
-	mi := &file_api_app_proto_msgTypes[71]
+	mi := &file_api_app_proto_msgTypes[73]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3928,7 +4013,7 @@ type AdminMonthRecommendReply_List struct {
 func (x *AdminMonthRecommendReply_List) Reset() {
 	*x = AdminMonthRecommendReply_List{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_app_proto_msgTypes[72]
+		mi := &file_api_app_proto_msgTypes[74]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3941,7 +4026,7 @@ func (x *AdminMonthRecommendReply_List) String() string {
 func (*AdminMonthRecommendReply_List) ProtoMessage() {}
 
 func (x *AdminMonthRecommendReply_List) ProtoReflect() protoreflect.Message {
-	mi := &file_api_app_proto_msgTypes[72]
+	mi := &file_api_app_proto_msgTypes[74]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3998,7 +4083,7 @@ type AdminConfigReply_List struct {
 func (x *AdminConfigReply_List) Reset() {
 	*x = AdminConfigReply_List{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_app_proto_msgTypes[73]
+		mi := &file_api_app_proto_msgTypes[75]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4011,7 +4096,7 @@ func (x *AdminConfigReply_List) String() string {
 func (*AdminConfigReply_List) ProtoMessage() {}
 
 func (x *AdminConfigReply_List) ProtoReflect() protoreflect.Message {
-	mi := &file_api_app_proto_msgTypes[73]
+	mi := &file_api_app_proto_msgTypes[75]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4060,7 +4145,7 @@ type AdminListReply_List struct {
 func (x *AdminListReply_List) Reset() {
 	*x = AdminListReply_List{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_app_proto_msgTypes[74]
+		mi := &file_api_app_proto_msgTypes[76]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4073,7 +4158,7 @@ func (x *AdminListReply_List) String() string {
 func (*AdminListReply_List) ProtoMessage() {}
 
 func (x *AdminListReply_List) ProtoReflect() protoreflect.Message {
-	mi := &file_api_app_proto_msgTypes[74]
+	mi := &file_api_app_proto_msgTypes[76]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4116,7 +4201,7 @@ type AuthListReply_List struct {
 func (x *AuthListReply_List) Reset() {
 	*x = AuthListReply_List{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_app_proto_msgTypes[75]
+		mi := &file_api_app_proto_msgTypes[77]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4129,7 +4214,7 @@ func (x *AuthListReply_List) String() string {
 func (*AuthListReply_List) ProtoMessage() {}
 
 func (x *AuthListReply_List) ProtoReflect() protoreflect.Message {
-	mi := &file_api_app_proto_msgTypes[75]
+	mi := &file_api_app_proto_msgTypes[77]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4179,7 +4264,7 @@ type UserAuthListReply_List struct {
 func (x *UserAuthListReply_List) Reset() {
 	*x = UserAuthListReply_List{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_app_proto_msgTypes[76]
+		mi := &file_api_app_proto_msgTypes[78]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4192,7 +4277,7 @@ func (x *UserAuthListReply_List) String() string {
 func (*UserAuthListReply_List) ProtoMessage() {}
 
 func (x *UserAuthListReply_List) ProtoReflect() protoreflect.Message {
-	mi := &file_api_app_proto_msgTypes[76]
+	mi := &file_api_app_proto_msgTypes[78]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4242,7 +4327,7 @@ type MyAuthListReply_List struct {
 func (x *MyAuthListReply_List) Reset() {
 	*x = MyAuthListReply_List{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_app_proto_msgTypes[77]
+		mi := &file_api_app_proto_msgTypes[79]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4255,7 +4340,7 @@ func (x *MyAuthListReply_List) String() string {
 func (*MyAuthListReply_List) ProtoMessage() {}
 
 func (x *MyAuthListReply_List) ProtoReflect() protoreflect.Message {
-	mi := &file_api_app_proto_msgTypes[77]
+	mi := &file_api_app_proto_msgTypes[79]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4304,7 +4389,7 @@ type AdminConfigUpdateRequest_SendBody struct {
 func (x *AdminConfigUpdateRequest_SendBody) Reset() {
 	*x = AdminConfigUpdateRequest_SendBody{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_app_proto_msgTypes[78]
+		mi := &file_api_app_proto_msgTypes[80]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4317,7 +4402,7 @@ func (x *AdminConfigUpdateRequest_SendBody) String() string {
 func (*AdminConfigUpdateRequest_SendBody) ProtoMessage() {}
 
 func (x *AdminConfigUpdateRequest_SendBody) ProtoReflect() protoreflect.Message {
-	mi := &file_api_app_proto_msgTypes[78]
+	mi := &file_api_app_proto_msgTypes[80]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4359,7 +4444,7 @@ type AuthAdminCreateRequest_SendBody struct {
 func (x *AuthAdminCreateRequest_SendBody) Reset() {
 	*x = AuthAdminCreateRequest_SendBody{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_app_proto_msgTypes[79]
+		mi := &file_api_app_proto_msgTypes[81]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4372,7 +4457,7 @@ func (x *AuthAdminCreateRequest_SendBody) String() string {
 func (*AuthAdminCreateRequest_SendBody) ProtoMessage() {}
 
 func (x *AuthAdminCreateRequest_SendBody) ProtoReflect() protoreflect.Message {
-	mi := &file_api_app_proto_msgTypes[79]
+	mi := &file_api_app_proto_msgTypes[81]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4414,7 +4499,7 @@ type AuthAdminDeleteRequest_SendBody struct {
 func (x *AuthAdminDeleteRequest_SendBody) Reset() {
 	*x = AuthAdminDeleteRequest_SendBody{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_app_proto_msgTypes[80]
+		mi := &file_api_app_proto_msgTypes[82]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4427,7 +4512,7 @@ func (x *AuthAdminDeleteRequest_SendBody) String() string {
 func (*AuthAdminDeleteRequest_SendBody) ProtoMessage() {}
 
 func (x *AuthAdminDeleteRequest_SendBody) ProtoReflect() protoreflect.Message {
-	mi := &file_api_app_proto_msgTypes[80]
+	mi := &file_api_app_proto_msgTypes[82]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4469,7 +4554,7 @@ type AdminLoginRequest_SendBody struct {
 func (x *AdminLoginRequest_SendBody) Reset() {
 	*x = AdminLoginRequest_SendBody{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_app_proto_msgTypes[81]
+		mi := &file_api_app_proto_msgTypes[83]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4482,7 +4567,7 @@ func (x *AdminLoginRequest_SendBody) String() string {
 func (*AdminLoginRequest_SendBody) ProtoMessage() {}
 
 func (x *AdminLoginRequest_SendBody) ProtoReflect() protoreflect.Message {
-	mi := &file_api_app_proto_msgTypes[81]
+	mi := &file_api_app_proto_msgTypes[83]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4524,7 +4609,7 @@ type AdminChangePasswordRequest_SendBody struct {
 func (x *AdminChangePasswordRequest_SendBody) Reset() {
 	*x = AdminChangePasswordRequest_SendBody{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_app_proto_msgTypes[82]
+		mi := &file_api_app_proto_msgTypes[84]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4537,7 +4622,7 @@ func (x *AdminChangePasswordRequest_SendBody) String() string {
 func (*AdminChangePasswordRequest_SendBody) ProtoMessage() {}
 
 func (x *AdminChangePasswordRequest_SendBody) ProtoReflect() protoreflect.Message {
-	mi := &file_api_app_proto_msgTypes[82]
+	mi := &file_api_app_proto_msgTypes[84]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4579,7 +4664,7 @@ type AdminCreateAccountRequest_SendBody struct {
 func (x *AdminCreateAccountRequest_SendBody) Reset() {
 	*x = AdminCreateAccountRequest_SendBody{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_app_proto_msgTypes[83]
+		mi := &file_api_app_proto_msgTypes[85]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4592,7 +4677,7 @@ func (x *AdminCreateAccountRequest_SendBody) String() string {
 func (*AdminCreateAccountRequest_SendBody) ProtoMessage() {}
 
 func (x *AdminCreateAccountRequest_SendBody) ProtoReflect() protoreflect.Message {
-	mi := &file_api_app_proto_msgTypes[83]
+	mi := &file_api_app_proto_msgTypes[85]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4620,6 +4705,61 @@ func (x *AdminCreateAccountRequest_SendBody) GetPassword() string {
 		return x.Password
 	}
 	return ""
+}
+
+type UpdateUserRequest_SendBody struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	UserId int64 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Undo   int64 `protobuf:"varint,2,opt,name=undo,proto3" json:"undo,omitempty"`
+}
+
+func (x *UpdateUserRequest_SendBody) Reset() {
+	*x = UpdateUserRequest_SendBody{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_api_app_proto_msgTypes[86]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *UpdateUserRequest_SendBody) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateUserRequest_SendBody) ProtoMessage() {}
+
+func (x *UpdateUserRequest_SendBody) ProtoReflect() protoreflect.Message {
+	mi := &file_api_app_proto_msgTypes[86]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateUserRequest_SendBody.ProtoReflect.Descriptor instead.
+func (*UpdateUserRequest_SendBody) Descriptor() ([]byte, []int) {
+	return file_api_app_proto_rawDescGZIP(), []int{60, 0}
+}
+
+func (x *UpdateUserRequest_SendBody) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *UpdateUserRequest_SendBody) GetUndo() int64 {
+	if x != nil {
+		return x.Undo
+	}
+	return 0
 }
 
 var File_api_app_proto protoreflect.FileDescriptor
@@ -5058,8 +5198,18 @@ var file_api_app_proto_rawDesc = []byte{
 	0x07, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x1a, 0x0a, 0x08, 0x70, 0x61, 0x73, 0x73,
 	0x77, 0x6f, 0x72, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x70, 0x61, 0x73, 0x73,
 	0x77, 0x6f, 0x72, 0x64, 0x22, 0x19, 0x0a, 0x17, 0x41, 0x64, 0x6d, 0x69, 0x6e, 0x43, 0x72, 0x65,
-	0x61, 0x74, 0x65, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x32,
-	0xc5, 0x18, 0x0a, 0x03, 0x41, 0x70, 0x70, 0x12, 0x57, 0x0a, 0x08, 0x55, 0x73, 0x65, 0x72, 0x49,
+	0x61, 0x74, 0x65, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22,
+	0x8a, 0x01, 0x0a, 0x11, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65,
+	0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x3c, 0x0a, 0x09, 0x73, 0x65, 0x6e, 0x64, 0x5f, 0x62, 0x6f,
+	0x64, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1f, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x55,
+	0x70, 0x64, 0x61, 0x74, 0x65, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x2e, 0x53, 0x65, 0x6e, 0x64, 0x42, 0x6f, 0x64, 0x79, 0x52, 0x08, 0x73, 0x65, 0x6e, 0x64, 0x42,
+	0x6f, 0x64, 0x79, 0x1a, 0x37, 0x0a, 0x08, 0x53, 0x65, 0x6e, 0x64, 0x42, 0x6f, 0x64, 0x79, 0x12,
+	0x17, 0x0a, 0x07, 0x75, 0x73, 0x65, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03,
+	0x52, 0x06, 0x75, 0x73, 0x65, 0x72, 0x49, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x75, 0x6e, 0x64, 0x6f,
+	0x18, 0x02, 0x20, 0x01, 0x28, 0x03, 0x52, 0x04, 0x75, 0x6e, 0x64, 0x6f, 0x22, 0x11, 0x0a, 0x0f,
+	0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x32,
+	0xb0, 0x19, 0x0a, 0x03, 0x41, 0x70, 0x70, 0x12, 0x57, 0x0a, 0x08, 0x55, 0x73, 0x65, 0x72, 0x49,
 	0x6e, 0x66, 0x6f, 0x12, 0x14, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x55, 0x73, 0x65, 0x72, 0x49, 0x6e,
 	0x66, 0x6f, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x12, 0x2e, 0x61, 0x70, 0x69, 0x2e,
 	0x55, 0x73, 0x65, 0x72, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x21, 0x82,
@@ -5207,57 +5357,63 @@ var file_api_app_proto_rawDesc = []byte{
 	0x75, 0x6e, 0x74, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x30, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x2a,
 	0x22, 0x1d, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x61, 0x64, 0x6d, 0x69, 0x6e, 0x5f, 0x64, 0x68, 0x62,
 	0x2f, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x5f, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x3a,
-	0x09, 0x73, 0x65, 0x6e, 0x64, 0x5f, 0x62, 0x6f, 0x64, 0x79, 0x12, 0x88, 0x01, 0x0a, 0x13, 0x41,
-	0x64, 0x6d, 0x69, 0x6e, 0x43, 0x68, 0x61, 0x6e, 0x67, 0x65, 0x50, 0x61, 0x73, 0x73, 0x77, 0x6f,
-	0x72, 0x64, 0x12, 0x1f, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x41, 0x64, 0x6d, 0x69, 0x6e, 0x43, 0x68,
-	0x61, 0x6e, 0x67, 0x65, 0x50, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x52, 0x65, 0x71, 0x75,
-	0x65, 0x73, 0x74, 0x1a, 0x1d, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x41, 0x64, 0x6d, 0x69, 0x6e, 0x43,
-	0x68, 0x61, 0x6e, 0x67, 0x65, 0x50, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x52, 0x65, 0x70,
-	0x6c, 0x79, 0x22, 0x31, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x2b, 0x22, 0x1e, 0x2f, 0x61, 0x70, 0x69,
-	0x2f, 0x61, 0x64, 0x6d, 0x69, 0x6e, 0x5f, 0x64, 0x68, 0x62, 0x2f, 0x63, 0x68, 0x61, 0x6e, 0x67,
-	0x65, 0x5f, 0x70, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x3a, 0x09, 0x73, 0x65, 0x6e, 0x64,
-	0x5f, 0x62, 0x6f, 0x64, 0x79, 0x12, 0x5a, 0x0a, 0x09, 0x41, 0x64, 0x6d, 0x69, 0x6e, 0x4c, 0x69,
-	0x73, 0x74, 0x12, 0x15, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x41, 0x64, 0x6d, 0x69, 0x6e, 0x4c, 0x69,
-	0x73, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x13, 0x2e, 0x61, 0x70, 0x69, 0x2e,
-	0x41, 0x64, 0x6d, 0x69, 0x6e, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x21,
-	0x82, 0xd3, 0xe4, 0x93, 0x02, 0x1b, 0x12, 0x19, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x61, 0x64, 0x6d,
-	0x69, 0x6e, 0x5f, 0x64, 0x68, 0x62, 0x2f, 0x61, 0x64, 0x6d, 0x69, 0x6e, 0x5f, 0x6c, 0x69, 0x73,
-	0x74, 0x12, 0x56, 0x0a, 0x08, 0x41, 0x75, 0x74, 0x68, 0x4c, 0x69, 0x73, 0x74, 0x12, 0x14, 0x2e,
-	0x61, 0x70, 0x69, 0x2e, 0x41, 0x75, 0x74, 0x68, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x71, 0x75,
-	0x65, 0x73, 0x74, 0x1a, 0x12, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x41, 0x75, 0x74, 0x68, 0x4c, 0x69,
-	0x73, 0x74, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x20, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x1a, 0x12,
-	0x18, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x61, 0x64, 0x6d, 0x69, 0x6e, 0x5f, 0x64, 0x68, 0x62, 0x2f,
-	0x61, 0x75, 0x74, 0x68, 0x5f, 0x6c, 0x69, 0x73, 0x74, 0x12, 0x5f, 0x0a, 0x0a, 0x4d, 0x79, 0x41,
-	0x75, 0x74, 0x68, 0x4c, 0x69, 0x73, 0x74, 0x12, 0x16, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x4d, 0x79,
+	0x09, 0x73, 0x65, 0x6e, 0x64, 0x5f, 0x62, 0x6f, 0x64, 0x79, 0x12, 0x69, 0x0a, 0x0a, 0x55, 0x70,
+	0x64, 0x61, 0x74, 0x65, 0x55, 0x73, 0x65, 0x72, 0x12, 0x16, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x55,
+	0x70, 0x64, 0x61, 0x74, 0x65, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x1a, 0x14, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x55, 0x73, 0x65,
+	0x72, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x2d, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x27, 0x22, 0x1a,
+	0x2f, 0x61, 0x70, 0x69, 0x2f, 0x61, 0x64, 0x6d, 0x69, 0x6e, 0x5f, 0x64, 0x68, 0x62, 0x2f, 0x75,
+	0x70, 0x64, 0x61, 0x74, 0x65, 0x5f, 0x75, 0x73, 0x65, 0x72, 0x3a, 0x09, 0x73, 0x65, 0x6e, 0x64,
+	0x5f, 0x62, 0x6f, 0x64, 0x79, 0x12, 0x88, 0x01, 0x0a, 0x13, 0x41, 0x64, 0x6d, 0x69, 0x6e, 0x43,
+	0x68, 0x61, 0x6e, 0x67, 0x65, 0x50, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x12, 0x1f, 0x2e,
+	0x61, 0x70, 0x69, 0x2e, 0x41, 0x64, 0x6d, 0x69, 0x6e, 0x43, 0x68, 0x61, 0x6e, 0x67, 0x65, 0x50,
+	0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1d,
+	0x2e, 0x61, 0x70, 0x69, 0x2e, 0x41, 0x64, 0x6d, 0x69, 0x6e, 0x43, 0x68, 0x61, 0x6e, 0x67, 0x65,
+	0x50, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x31, 0x82,
+	0xd3, 0xe4, 0x93, 0x02, 0x2b, 0x22, 0x1e, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x61, 0x64, 0x6d, 0x69,
+	0x6e, 0x5f, 0x64, 0x68, 0x62, 0x2f, 0x63, 0x68, 0x61, 0x6e, 0x67, 0x65, 0x5f, 0x70, 0x61, 0x73,
+	0x73, 0x77, 0x6f, 0x72, 0x64, 0x3a, 0x09, 0x73, 0x65, 0x6e, 0x64, 0x5f, 0x62, 0x6f, 0x64, 0x79,
+	0x12, 0x5a, 0x0a, 0x09, 0x41, 0x64, 0x6d, 0x69, 0x6e, 0x4c, 0x69, 0x73, 0x74, 0x12, 0x15, 0x2e,
+	0x61, 0x70, 0x69, 0x2e, 0x41, 0x64, 0x6d, 0x69, 0x6e, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x71,
+	0x75, 0x65, 0x73, 0x74, 0x1a, 0x13, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x41, 0x64, 0x6d, 0x69, 0x6e,
+	0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x21, 0x82, 0xd3, 0xe4, 0x93, 0x02,
+	0x1b, 0x12, 0x19, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x61, 0x64, 0x6d, 0x69, 0x6e, 0x5f, 0x64, 0x68,
+	0x62, 0x2f, 0x61, 0x64, 0x6d, 0x69, 0x6e, 0x5f, 0x6c, 0x69, 0x73, 0x74, 0x12, 0x56, 0x0a, 0x08,
+	0x41, 0x75, 0x74, 0x68, 0x4c, 0x69, 0x73, 0x74, 0x12, 0x14, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x41,
+	0x75, 0x74, 0x68, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x12,
+	0x2e, 0x61, 0x70, 0x69, 0x2e, 0x41, 0x75, 0x74, 0x68, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x70,
+	0x6c, 0x79, 0x22, 0x20, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x1a, 0x12, 0x18, 0x2f, 0x61, 0x70, 0x69,
+	0x2f, 0x61, 0x64, 0x6d, 0x69, 0x6e, 0x5f, 0x64, 0x68, 0x62, 0x2f, 0x61, 0x75, 0x74, 0x68, 0x5f,
+	0x6c, 0x69, 0x73, 0x74, 0x12, 0x5f, 0x0a, 0x0a, 0x4d, 0x79, 0x41, 0x75, 0x74, 0x68, 0x4c, 0x69,
+	0x73, 0x74, 0x12, 0x16, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x4d, 0x79, 0x41, 0x75, 0x74, 0x68, 0x4c,
+	0x69, 0x73, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x14, 0x2e, 0x61, 0x70, 0x69,
+	0x2e, 0x4d, 0x79, 0x41, 0x75, 0x74, 0x68, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x70, 0x6c, 0x79,
+	0x22, 0x23, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x1d, 0x12, 0x1b, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x61,
+	0x64, 0x6d, 0x69, 0x6e, 0x5f, 0x64, 0x68, 0x62, 0x2f, 0x6d, 0x79, 0x5f, 0x61, 0x75, 0x74, 0x68,
+	0x5f, 0x6c, 0x69, 0x73, 0x74, 0x12, 0x67, 0x0a, 0x0c, 0x55, 0x73, 0x65, 0x72, 0x41, 0x75, 0x74,
+	0x68, 0x4c, 0x69, 0x73, 0x74, 0x12, 0x18, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x55, 0x73, 0x65, 0x72,
 	0x41, 0x75, 0x74, 0x68, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a,
-	0x14, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x4d, 0x79, 0x41, 0x75, 0x74, 0x68, 0x4c, 0x69, 0x73, 0x74,
-	0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x23, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x1d, 0x12, 0x1b, 0x2f,
-	0x61, 0x70, 0x69, 0x2f, 0x61, 0x64, 0x6d, 0x69, 0x6e, 0x5f, 0x64, 0x68, 0x62, 0x2f, 0x6d, 0x79,
-	0x5f, 0x61, 0x75, 0x74, 0x68, 0x5f, 0x6c, 0x69, 0x73, 0x74, 0x12, 0x67, 0x0a, 0x0c, 0x55, 0x73,
-	0x65, 0x72, 0x41, 0x75, 0x74, 0x68, 0x4c, 0x69, 0x73, 0x74, 0x12, 0x18, 0x2e, 0x61, 0x70, 0x69,
-	0x2e, 0x55, 0x73, 0x65, 0x72, 0x41, 0x75, 0x74, 0x68, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x71,
-	0x75, 0x65, 0x73, 0x74, 0x1a, 0x16, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x55, 0x73, 0x65, 0x72, 0x41,
-	0x75, 0x74, 0x68, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x25, 0x82, 0xd3,
-	0xe4, 0x93, 0x02, 0x1f, 0x12, 0x1d, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x61, 0x64, 0x6d, 0x69, 0x6e,
-	0x5f, 0x64, 0x68, 0x62, 0x2f, 0x75, 0x73, 0x65, 0x72, 0x5f, 0x61, 0x75, 0x74, 0x68, 0x5f, 0x6c,
-	0x69, 0x73, 0x74, 0x12, 0x78, 0x0a, 0x0f, 0x41, 0x75, 0x74, 0x68, 0x41, 0x64, 0x6d, 0x69, 0x6e,
-	0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x12, 0x1b, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x41, 0x75, 0x74,
-	0x68, 0x41, 0x64, 0x6d, 0x69, 0x6e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x52, 0x65, 0x71, 0x75,
-	0x65, 0x73, 0x74, 0x1a, 0x19, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x41, 0x75, 0x74, 0x68, 0x41, 0x64,
-	0x6d, 0x69, 0x6e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x2d,
-	0x82, 0xd3, 0xe4, 0x93, 0x02, 0x27, 0x22, 0x1a, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x61, 0x64, 0x6d,
-	0x69, 0x6e, 0x5f, 0x64, 0x68, 0x62, 0x2f, 0x61, 0x75, 0x74, 0x68, 0x5f, 0x63, 0x72, 0x65, 0x61,
-	0x74, 0x65, 0x3a, 0x09, 0x73, 0x65, 0x6e, 0x64, 0x5f, 0x62, 0x6f, 0x64, 0x79, 0x12, 0x78, 0x0a,
-	0x0f, 0x41, 0x75, 0x74, 0x68, 0x41, 0x64, 0x6d, 0x69, 0x6e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65,
-	0x12, 0x1b, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x41, 0x75, 0x74, 0x68, 0x41, 0x64, 0x6d, 0x69, 0x6e,
-	0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x19, 0x2e,
-	0x61, 0x70, 0x69, 0x2e, 0x41, 0x75, 0x74, 0x68, 0x41, 0x64, 0x6d, 0x69, 0x6e, 0x44, 0x65, 0x6c,
-	0x65, 0x74, 0x65, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x2d, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x27,
-	0x22, 0x1a, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x61, 0x64, 0x6d, 0x69, 0x6e, 0x5f, 0x64, 0x68, 0x62,
-	0x2f, 0x61, 0x75, 0x74, 0x68, 0x5f, 0x64, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x3a, 0x09, 0x73, 0x65,
-	0x6e, 0x64, 0x5f, 0x62, 0x6f, 0x64, 0x79, 0x42, 0x11, 0x0a, 0x03, 0x61, 0x70, 0x69, 0x50, 0x01,
-	0x5a, 0x08, 0x2f, 0x61, 0x70, 0x69, 0x3b, 0x61, 0x70, 0x69, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74,
-	0x6f, 0x33,
+	0x16, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x55, 0x73, 0x65, 0x72, 0x41, 0x75, 0x74, 0x68, 0x4c, 0x69,
+	0x73, 0x74, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x25, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x1f, 0x12,
+	0x1d, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x61, 0x64, 0x6d, 0x69, 0x6e, 0x5f, 0x64, 0x68, 0x62, 0x2f,
+	0x75, 0x73, 0x65, 0x72, 0x5f, 0x61, 0x75, 0x74, 0x68, 0x5f, 0x6c, 0x69, 0x73, 0x74, 0x12, 0x78,
+	0x0a, 0x0f, 0x41, 0x75, 0x74, 0x68, 0x41, 0x64, 0x6d, 0x69, 0x6e, 0x43, 0x72, 0x65, 0x61, 0x74,
+	0x65, 0x12, 0x1b, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x41, 0x75, 0x74, 0x68, 0x41, 0x64, 0x6d, 0x69,
+	0x6e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x19,
+	0x2e, 0x61, 0x70, 0x69, 0x2e, 0x41, 0x75, 0x74, 0x68, 0x41, 0x64, 0x6d, 0x69, 0x6e, 0x43, 0x72,
+	0x65, 0x61, 0x74, 0x65, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x2d, 0x82, 0xd3, 0xe4, 0x93, 0x02,
+	0x27, 0x22, 0x1a, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x61, 0x64, 0x6d, 0x69, 0x6e, 0x5f, 0x64, 0x68,
+	0x62, 0x2f, 0x61, 0x75, 0x74, 0x68, 0x5f, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x3a, 0x09, 0x73,
+	0x65, 0x6e, 0x64, 0x5f, 0x62, 0x6f, 0x64, 0x79, 0x12, 0x78, 0x0a, 0x0f, 0x41, 0x75, 0x74, 0x68,
+	0x41, 0x64, 0x6d, 0x69, 0x6e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x12, 0x1b, 0x2e, 0x61, 0x70,
+	0x69, 0x2e, 0x41, 0x75, 0x74, 0x68, 0x41, 0x64, 0x6d, 0x69, 0x6e, 0x44, 0x65, 0x6c, 0x65, 0x74,
+	0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x19, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x41,
+	0x75, 0x74, 0x68, 0x41, 0x64, 0x6d, 0x69, 0x6e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x52, 0x65,
+	0x70, 0x6c, 0x79, 0x22, 0x2d, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x27, 0x22, 0x1a, 0x2f, 0x61, 0x70,
+	0x69, 0x2f, 0x61, 0x64, 0x6d, 0x69, 0x6e, 0x5f, 0x64, 0x68, 0x62, 0x2f, 0x61, 0x75, 0x74, 0x68,
+	0x5f, 0x64, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x3a, 0x09, 0x73, 0x65, 0x6e, 0x64, 0x5f, 0x62, 0x6f,
+	0x64, 0x79, 0x42, 0x11, 0x0a, 0x03, 0x61, 0x70, 0x69, 0x50, 0x01, 0x5a, 0x08, 0x2f, 0x61, 0x70,
+	0x69, 0x3b, 0x61, 0x70, 0x69, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -5272,7 +5428,7 @@ func file_api_app_proto_rawDescGZIP() []byte {
 	return file_api_app_proto_rawDescData
 }
 
-var file_api_app_proto_msgTypes = make([]protoimpl.MessageInfo, 84)
+var file_api_app_proto_msgTypes = make([]protoimpl.MessageInfo, 87)
 var file_api_app_proto_goTypes = []interface{}{
 	(*EthAuthorizeRequest)(nil),                 // 0: api.EthAuthorizeRequest
 	(*EthAuthorizeReply)(nil),                   // 1: api.EthAuthorizeReply
@@ -5334,119 +5490,125 @@ var file_api_app_proto_goTypes = []interface{}{
 	(*AdminChangePasswordReply)(nil),            // 57: api.AdminChangePasswordReply
 	(*AdminCreateAccountRequest)(nil),           // 58: api.AdminCreateAccountRequest
 	(*AdminCreateAccountReply)(nil),             // 59: api.AdminCreateAccountReply
-	(*EthAuthorizeRequest_SendBody)(nil),        // 60: api.EthAuthorizeRequest.SendBody
-	(*RewardListReply_List)(nil),                // 61: api.RewardListReply.List
-	(*RecommendRewardListReply_List)(nil),       // 62: api.RecommendRewardListReply.List
-	(*FeeRewardListReply_List)(nil),             // 63: api.FeeRewardListReply.List
-	(*WithdrawListReply_List)(nil),              // 64: api.WithdrawListReply.List
-	(*RecommendListReply_List)(nil),             // 65: api.RecommendListReply.List
-	(*WithdrawRequest_SendBody)(nil),            // 66: api.WithdrawRequest.SendBody
-	(*AdminRewardListReply_List)(nil),           // 67: api.AdminRewardListReply.List
-	(*AdminUserListReply_UserList)(nil),         // 68: api.AdminUserListReply.UserList
-	(*AdminLocationListReply_LocationList)(nil), // 69: api.AdminLocationListReply.LocationList
-	(*AdminWithdrawListReply_List)(nil),         // 70: api.AdminWithdrawListReply.List
-	(*AdminUserRecommendReply_List)(nil),        // 71: api.AdminUserRecommendReply.List
-	(*AdminMonthRecommendReply_List)(nil),       // 72: api.AdminMonthRecommendReply.List
-	(*AdminConfigReply_List)(nil),               // 73: api.AdminConfigReply.List
-	(*AdminListReply_List)(nil),                 // 74: api.AdminListReply.List
-	(*AuthListReply_List)(nil),                  // 75: api.AuthListReply.List
-	(*UserAuthListReply_List)(nil),              // 76: api.UserAuthListReply.List
-	(*MyAuthListReply_List)(nil),                // 77: api.MyAuthListReply.List
-	(*AdminConfigUpdateRequest_SendBody)(nil),   // 78: api.AdminConfigUpdateRequest.SendBody
-	(*AuthAdminCreateRequest_SendBody)(nil),     // 79: api.AuthAdminCreateRequest.SendBody
-	(*AuthAdminDeleteRequest_SendBody)(nil),     // 80: api.AuthAdminDeleteRequest.SendBody
-	(*AdminLoginRequest_SendBody)(nil),          // 81: api.AdminLoginRequest.SendBody
-	(*AdminChangePasswordRequest_SendBody)(nil), // 82: api.AdminChangePasswordRequest.SendBody
-	(*AdminCreateAccountRequest_SendBody)(nil),  // 83: api.AdminCreateAccountRequest.SendBody
+	(*UpdateUserRequest)(nil),                   // 60: api.UpdateUserRequest
+	(*UpdateUserReply)(nil),                     // 61: api.UpdateUserReply
+	(*EthAuthorizeRequest_SendBody)(nil),        // 62: api.EthAuthorizeRequest.SendBody
+	(*RewardListReply_List)(nil),                // 63: api.RewardListReply.List
+	(*RecommendRewardListReply_List)(nil),       // 64: api.RecommendRewardListReply.List
+	(*FeeRewardListReply_List)(nil),             // 65: api.FeeRewardListReply.List
+	(*WithdrawListReply_List)(nil),              // 66: api.WithdrawListReply.List
+	(*RecommendListReply_List)(nil),             // 67: api.RecommendListReply.List
+	(*WithdrawRequest_SendBody)(nil),            // 68: api.WithdrawRequest.SendBody
+	(*AdminRewardListReply_List)(nil),           // 69: api.AdminRewardListReply.List
+	(*AdminUserListReply_UserList)(nil),         // 70: api.AdminUserListReply.UserList
+	(*AdminLocationListReply_LocationList)(nil), // 71: api.AdminLocationListReply.LocationList
+	(*AdminWithdrawListReply_List)(nil),         // 72: api.AdminWithdrawListReply.List
+	(*AdminUserRecommendReply_List)(nil),        // 73: api.AdminUserRecommendReply.List
+	(*AdminMonthRecommendReply_List)(nil),       // 74: api.AdminMonthRecommendReply.List
+	(*AdminConfigReply_List)(nil),               // 75: api.AdminConfigReply.List
+	(*AdminListReply_List)(nil),                 // 76: api.AdminListReply.List
+	(*AuthListReply_List)(nil),                  // 77: api.AuthListReply.List
+	(*UserAuthListReply_List)(nil),              // 78: api.UserAuthListReply.List
+	(*MyAuthListReply_List)(nil),                // 79: api.MyAuthListReply.List
+	(*AdminConfigUpdateRequest_SendBody)(nil),   // 80: api.AdminConfigUpdateRequest.SendBody
+	(*AuthAdminCreateRequest_SendBody)(nil),     // 81: api.AuthAdminCreateRequest.SendBody
+	(*AuthAdminDeleteRequest_SendBody)(nil),     // 82: api.AuthAdminDeleteRequest.SendBody
+	(*AdminLoginRequest_SendBody)(nil),          // 83: api.AdminLoginRequest.SendBody
+	(*AdminChangePasswordRequest_SendBody)(nil), // 84: api.AdminChangePasswordRequest.SendBody
+	(*AdminCreateAccountRequest_SendBody)(nil),  // 85: api.AdminCreateAccountRequest.SendBody
+	(*UpdateUserRequest_SendBody)(nil),          // 86: api.UpdateUserRequest.SendBody
 }
 var file_api_app_proto_depIdxs = []int32{
-	60, // 0: api.EthAuthorizeRequest.send_body:type_name -> api.EthAuthorizeRequest.SendBody
-	61, // 1: api.RewardListReply.rewards:type_name -> api.RewardListReply.List
-	62, // 2: api.RecommendRewardListReply.rewards:type_name -> api.RecommendRewardListReply.List
-	63, // 3: api.FeeRewardListReply.rewards:type_name -> api.FeeRewardListReply.List
-	64, // 4: api.WithdrawListReply.withdraw:type_name -> api.WithdrawListReply.List
-	65, // 5: api.RecommendListReply.recommends:type_name -> api.RecommendListReply.List
-	66, // 6: api.WithdrawRequest.send_body:type_name -> api.WithdrawRequest.SendBody
-	67, // 7: api.AdminRewardListReply.rewards:type_name -> api.AdminRewardListReply.List
-	68, // 8: api.AdminUserListReply.users:type_name -> api.AdminUserListReply.UserList
-	69, // 9: api.AdminLocationListReply.locations:type_name -> api.AdminLocationListReply.LocationList
-	70, // 10: api.AdminWithdrawListReply.withdraw:type_name -> api.AdminWithdrawListReply.List
-	71, // 11: api.AdminUserRecommendReply.users:type_name -> api.AdminUserRecommendReply.List
-	72, // 12: api.AdminMonthRecommendReply.users:type_name -> api.AdminMonthRecommendReply.List
-	73, // 13: api.AdminConfigReply.config:type_name -> api.AdminConfigReply.List
-	74, // 14: api.AdminListReply.account:type_name -> api.AdminListReply.List
-	75, // 15: api.AuthListReply.auth:type_name -> api.AuthListReply.List
-	76, // 16: api.UserAuthListReply.auth:type_name -> api.UserAuthListReply.List
-	77, // 17: api.MyAuthListReply.auth:type_name -> api.MyAuthListReply.List
-	78, // 18: api.AdminConfigUpdateRequest.send_body:type_name -> api.AdminConfigUpdateRequest.SendBody
-	79, // 19: api.AuthAdminCreateRequest.send_body:type_name -> api.AuthAdminCreateRequest.SendBody
-	80, // 20: api.AuthAdminDeleteRequest.send_body:type_name -> api.AuthAdminDeleteRequest.SendBody
-	81, // 21: api.AdminLoginRequest.send_body:type_name -> api.AdminLoginRequest.SendBody
-	82, // 22: api.AdminChangePasswordRequest.send_body:type_name -> api.AdminChangePasswordRequest.SendBody
-	83, // 23: api.AdminCreateAccountRequest.send_body:type_name -> api.AdminCreateAccountRequest.SendBody
-	4,  // 24: api.App.UserInfo:input_type -> api.UserInfoRequest
-	6,  // 25: api.App.RewardList:input_type -> api.RewardListRequest
-	8,  // 26: api.App.RecommendRewardList:input_type -> api.RecommendRewardListRequest
-	10, // 27: api.App.FeeRewardList:input_type -> api.FeeRewardListRequest
-	12, // 28: api.App.WithdrawList:input_type -> api.WithdrawListRequest
-	14, // 29: api.App.RecommendList:input_type -> api.RecommendListRequest
-	16, // 30: api.App.Withdraw:input_type -> api.WithdrawRequest
-	2,  // 31: api.App.Deposit:input_type -> api.DepositRequest
-	18, // 32: api.App.AdminRewardList:input_type -> api.AdminRewardListRequest
-	20, // 33: api.App.AdminUserList:input_type -> api.AdminUserListRequest
-	22, // 34: api.App.AdminLocationList:input_type -> api.AdminLocationListRequest
-	24, // 35: api.App.AdminWithdrawList:input_type -> api.AdminWithdrawListRequest
-	26, // 36: api.App.AdminWithdraw:input_type -> api.AdminWithdrawRequest
-	28, // 37: api.App.AdminWithdrawEth:input_type -> api.AdminWithdrawEthRequest
-	30, // 38: api.App.AdminFee:input_type -> api.AdminFeeRequest
-	32, // 39: api.App.AdminAll:input_type -> api.AdminAllRequest
-	34, // 40: api.App.AdminUserRecommend:input_type -> api.AdminUserRecommendRequest
-	36, // 41: api.App.AdminMonthRecommend:input_type -> api.AdminMonthRecommendRequest
-	38, // 42: api.App.AdminConfig:input_type -> api.AdminConfigRequest
-	48, // 43: api.App.AdminConfigUpdate:input_type -> api.AdminConfigUpdateRequest
-	54, // 44: api.App.AdminLogin:input_type -> api.AdminLoginRequest
-	58, // 45: api.App.AdminCreateAccount:input_type -> api.AdminCreateAccountRequest
-	56, // 46: api.App.AdminChangePassword:input_type -> api.AdminChangePasswordRequest
-	40, // 47: api.App.AdminList:input_type -> api.AdminListRequest
-	42, // 48: api.App.AuthList:input_type -> api.AuthListRequest
-	46, // 49: api.App.MyAuthList:input_type -> api.MyAuthListRequest
-	44, // 50: api.App.UserAuthList:input_type -> api.UserAuthListRequest
-	50, // 51: api.App.AuthAdminCreate:input_type -> api.AuthAdminCreateRequest
-	52, // 52: api.App.AuthAdminDelete:input_type -> api.AuthAdminDeleteRequest
-	5,  // 53: api.App.UserInfo:output_type -> api.UserInfoReply
-	7,  // 54: api.App.RewardList:output_type -> api.RewardListReply
-	9,  // 55: api.App.RecommendRewardList:output_type -> api.RecommendRewardListReply
-	11, // 56: api.App.FeeRewardList:output_type -> api.FeeRewardListReply
-	13, // 57: api.App.WithdrawList:output_type -> api.WithdrawListReply
-	15, // 58: api.App.RecommendList:output_type -> api.RecommendListReply
-	17, // 59: api.App.Withdraw:output_type -> api.WithdrawReply
-	3,  // 60: api.App.Deposit:output_type -> api.DepositReply
-	19, // 61: api.App.AdminRewardList:output_type -> api.AdminRewardListReply
-	21, // 62: api.App.AdminUserList:output_type -> api.AdminUserListReply
-	23, // 63: api.App.AdminLocationList:output_type -> api.AdminLocationListReply
-	25, // 64: api.App.AdminWithdrawList:output_type -> api.AdminWithdrawListReply
-	27, // 65: api.App.AdminWithdraw:output_type -> api.AdminWithdrawReply
-	29, // 66: api.App.AdminWithdrawEth:output_type -> api.AdminWithdrawEthReply
-	31, // 67: api.App.AdminFee:output_type -> api.AdminFeeReply
-	33, // 68: api.App.AdminAll:output_type -> api.AdminAllReply
-	35, // 69: api.App.AdminUserRecommend:output_type -> api.AdminUserRecommendReply
-	37, // 70: api.App.AdminMonthRecommend:output_type -> api.AdminMonthRecommendReply
-	39, // 71: api.App.AdminConfig:output_type -> api.AdminConfigReply
-	49, // 72: api.App.AdminConfigUpdate:output_type -> api.AdminConfigUpdateReply
-	55, // 73: api.App.AdminLogin:output_type -> api.AdminLoginReply
-	59, // 74: api.App.AdminCreateAccount:output_type -> api.AdminCreateAccountReply
-	57, // 75: api.App.AdminChangePassword:output_type -> api.AdminChangePasswordReply
-	41, // 76: api.App.AdminList:output_type -> api.AdminListReply
-	43, // 77: api.App.AuthList:output_type -> api.AuthListReply
-	47, // 78: api.App.MyAuthList:output_type -> api.MyAuthListReply
-	45, // 79: api.App.UserAuthList:output_type -> api.UserAuthListReply
-	51, // 80: api.App.AuthAdminCreate:output_type -> api.AuthAdminCreateReply
-	53, // 81: api.App.AuthAdminDelete:output_type -> api.AuthAdminDeleteReply
-	53, // [53:82] is the sub-list for method output_type
-	24, // [24:53] is the sub-list for method input_type
-	24, // [24:24] is the sub-list for extension type_name
-	24, // [24:24] is the sub-list for extension extendee
-	0,  // [0:24] is the sub-list for field type_name
+	62, // 0: api.EthAuthorizeRequest.send_body:type_name -> api.EthAuthorizeRequest.SendBody
+	63, // 1: api.RewardListReply.rewards:type_name -> api.RewardListReply.List
+	64, // 2: api.RecommendRewardListReply.rewards:type_name -> api.RecommendRewardListReply.List
+	65, // 3: api.FeeRewardListReply.rewards:type_name -> api.FeeRewardListReply.List
+	66, // 4: api.WithdrawListReply.withdraw:type_name -> api.WithdrawListReply.List
+	67, // 5: api.RecommendListReply.recommends:type_name -> api.RecommendListReply.List
+	68, // 6: api.WithdrawRequest.send_body:type_name -> api.WithdrawRequest.SendBody
+	69, // 7: api.AdminRewardListReply.rewards:type_name -> api.AdminRewardListReply.List
+	70, // 8: api.AdminUserListReply.users:type_name -> api.AdminUserListReply.UserList
+	71, // 9: api.AdminLocationListReply.locations:type_name -> api.AdminLocationListReply.LocationList
+	72, // 10: api.AdminWithdrawListReply.withdraw:type_name -> api.AdminWithdrawListReply.List
+	73, // 11: api.AdminUserRecommendReply.users:type_name -> api.AdminUserRecommendReply.List
+	74, // 12: api.AdminMonthRecommendReply.users:type_name -> api.AdminMonthRecommendReply.List
+	75, // 13: api.AdminConfigReply.config:type_name -> api.AdminConfigReply.List
+	76, // 14: api.AdminListReply.account:type_name -> api.AdminListReply.List
+	77, // 15: api.AuthListReply.auth:type_name -> api.AuthListReply.List
+	78, // 16: api.UserAuthListReply.auth:type_name -> api.UserAuthListReply.List
+	79, // 17: api.MyAuthListReply.auth:type_name -> api.MyAuthListReply.List
+	80, // 18: api.AdminConfigUpdateRequest.send_body:type_name -> api.AdminConfigUpdateRequest.SendBody
+	81, // 19: api.AuthAdminCreateRequest.send_body:type_name -> api.AuthAdminCreateRequest.SendBody
+	82, // 20: api.AuthAdminDeleteRequest.send_body:type_name -> api.AuthAdminDeleteRequest.SendBody
+	83, // 21: api.AdminLoginRequest.send_body:type_name -> api.AdminLoginRequest.SendBody
+	84, // 22: api.AdminChangePasswordRequest.send_body:type_name -> api.AdminChangePasswordRequest.SendBody
+	85, // 23: api.AdminCreateAccountRequest.send_body:type_name -> api.AdminCreateAccountRequest.SendBody
+	86, // 24: api.UpdateUserRequest.send_body:type_name -> api.UpdateUserRequest.SendBody
+	4,  // 25: api.App.UserInfo:input_type -> api.UserInfoRequest
+	6,  // 26: api.App.RewardList:input_type -> api.RewardListRequest
+	8,  // 27: api.App.RecommendRewardList:input_type -> api.RecommendRewardListRequest
+	10, // 28: api.App.FeeRewardList:input_type -> api.FeeRewardListRequest
+	12, // 29: api.App.WithdrawList:input_type -> api.WithdrawListRequest
+	14, // 30: api.App.RecommendList:input_type -> api.RecommendListRequest
+	16, // 31: api.App.Withdraw:input_type -> api.WithdrawRequest
+	2,  // 32: api.App.Deposit:input_type -> api.DepositRequest
+	18, // 33: api.App.AdminRewardList:input_type -> api.AdminRewardListRequest
+	20, // 34: api.App.AdminUserList:input_type -> api.AdminUserListRequest
+	22, // 35: api.App.AdminLocationList:input_type -> api.AdminLocationListRequest
+	24, // 36: api.App.AdminWithdrawList:input_type -> api.AdminWithdrawListRequest
+	26, // 37: api.App.AdminWithdraw:input_type -> api.AdminWithdrawRequest
+	28, // 38: api.App.AdminWithdrawEth:input_type -> api.AdminWithdrawEthRequest
+	30, // 39: api.App.AdminFee:input_type -> api.AdminFeeRequest
+	32, // 40: api.App.AdminAll:input_type -> api.AdminAllRequest
+	34, // 41: api.App.AdminUserRecommend:input_type -> api.AdminUserRecommendRequest
+	36, // 42: api.App.AdminMonthRecommend:input_type -> api.AdminMonthRecommendRequest
+	38, // 43: api.App.AdminConfig:input_type -> api.AdminConfigRequest
+	48, // 44: api.App.AdminConfigUpdate:input_type -> api.AdminConfigUpdateRequest
+	54, // 45: api.App.AdminLogin:input_type -> api.AdminLoginRequest
+	58, // 46: api.App.AdminCreateAccount:input_type -> api.AdminCreateAccountRequest
+	60, // 47: api.App.UpdateUser:input_type -> api.UpdateUserRequest
+	56, // 48: api.App.AdminChangePassword:input_type -> api.AdminChangePasswordRequest
+	40, // 49: api.App.AdminList:input_type -> api.AdminListRequest
+	42, // 50: api.App.AuthList:input_type -> api.AuthListRequest
+	46, // 51: api.App.MyAuthList:input_type -> api.MyAuthListRequest
+	44, // 52: api.App.UserAuthList:input_type -> api.UserAuthListRequest
+	50, // 53: api.App.AuthAdminCreate:input_type -> api.AuthAdminCreateRequest
+	52, // 54: api.App.AuthAdminDelete:input_type -> api.AuthAdminDeleteRequest
+	5,  // 55: api.App.UserInfo:output_type -> api.UserInfoReply
+	7,  // 56: api.App.RewardList:output_type -> api.RewardListReply
+	9,  // 57: api.App.RecommendRewardList:output_type -> api.RecommendRewardListReply
+	11, // 58: api.App.FeeRewardList:output_type -> api.FeeRewardListReply
+	13, // 59: api.App.WithdrawList:output_type -> api.WithdrawListReply
+	15, // 60: api.App.RecommendList:output_type -> api.RecommendListReply
+	17, // 61: api.App.Withdraw:output_type -> api.WithdrawReply
+	3,  // 62: api.App.Deposit:output_type -> api.DepositReply
+	19, // 63: api.App.AdminRewardList:output_type -> api.AdminRewardListReply
+	21, // 64: api.App.AdminUserList:output_type -> api.AdminUserListReply
+	23, // 65: api.App.AdminLocationList:output_type -> api.AdminLocationListReply
+	25, // 66: api.App.AdminWithdrawList:output_type -> api.AdminWithdrawListReply
+	27, // 67: api.App.AdminWithdraw:output_type -> api.AdminWithdrawReply
+	29, // 68: api.App.AdminWithdrawEth:output_type -> api.AdminWithdrawEthReply
+	31, // 69: api.App.AdminFee:output_type -> api.AdminFeeReply
+	33, // 70: api.App.AdminAll:output_type -> api.AdminAllReply
+	35, // 71: api.App.AdminUserRecommend:output_type -> api.AdminUserRecommendReply
+	37, // 72: api.App.AdminMonthRecommend:output_type -> api.AdminMonthRecommendReply
+	39, // 73: api.App.AdminConfig:output_type -> api.AdminConfigReply
+	49, // 74: api.App.AdminConfigUpdate:output_type -> api.AdminConfigUpdateReply
+	55, // 75: api.App.AdminLogin:output_type -> api.AdminLoginReply
+	59, // 76: api.App.AdminCreateAccount:output_type -> api.AdminCreateAccountReply
+	61, // 77: api.App.UpdateUser:output_type -> api.UpdateUserReply
+	57, // 78: api.App.AdminChangePassword:output_type -> api.AdminChangePasswordReply
+	41, // 79: api.App.AdminList:output_type -> api.AdminListReply
+	43, // 80: api.App.AuthList:output_type -> api.AuthListReply
+	47, // 81: api.App.MyAuthList:output_type -> api.MyAuthListReply
+	45, // 82: api.App.UserAuthList:output_type -> api.UserAuthListReply
+	51, // 83: api.App.AuthAdminCreate:output_type -> api.AuthAdminCreateReply
+	53, // 84: api.App.AuthAdminDelete:output_type -> api.AuthAdminDeleteReply
+	55, // [55:85] is the sub-list for method output_type
+	25, // [25:55] is the sub-list for method input_type
+	25, // [25:25] is the sub-list for extension type_name
+	25, // [25:25] is the sub-list for extension extendee
+	0,  // [0:25] is the sub-list for field type_name
 }
 
 func init() { file_api_app_proto_init() }
@@ -6176,7 +6338,7 @@ func file_api_app_proto_init() {
 			}
 		}
 		file_api_app_proto_msgTypes[60].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*EthAuthorizeRequest_SendBody); i {
+			switch v := v.(*UpdateUserRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -6188,7 +6350,7 @@ func file_api_app_proto_init() {
 			}
 		}
 		file_api_app_proto_msgTypes[61].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*RewardListReply_List); i {
+			switch v := v.(*UpdateUserReply); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -6200,7 +6362,7 @@ func file_api_app_proto_init() {
 			}
 		}
 		file_api_app_proto_msgTypes[62].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*RecommendRewardListReply_List); i {
+			switch v := v.(*EthAuthorizeRequest_SendBody); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -6212,7 +6374,7 @@ func file_api_app_proto_init() {
 			}
 		}
 		file_api_app_proto_msgTypes[63].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*FeeRewardListReply_List); i {
+			switch v := v.(*RewardListReply_List); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -6224,7 +6386,7 @@ func file_api_app_proto_init() {
 			}
 		}
 		file_api_app_proto_msgTypes[64].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*WithdrawListReply_List); i {
+			switch v := v.(*RecommendRewardListReply_List); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -6236,7 +6398,7 @@ func file_api_app_proto_init() {
 			}
 		}
 		file_api_app_proto_msgTypes[65].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*RecommendListReply_List); i {
+			switch v := v.(*FeeRewardListReply_List); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -6248,7 +6410,7 @@ func file_api_app_proto_init() {
 			}
 		}
 		file_api_app_proto_msgTypes[66].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*WithdrawRequest_SendBody); i {
+			switch v := v.(*WithdrawListReply_List); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -6260,7 +6422,7 @@ func file_api_app_proto_init() {
 			}
 		}
 		file_api_app_proto_msgTypes[67].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AdminRewardListReply_List); i {
+			switch v := v.(*RecommendListReply_List); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -6272,7 +6434,7 @@ func file_api_app_proto_init() {
 			}
 		}
 		file_api_app_proto_msgTypes[68].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AdminUserListReply_UserList); i {
+			switch v := v.(*WithdrawRequest_SendBody); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -6284,7 +6446,7 @@ func file_api_app_proto_init() {
 			}
 		}
 		file_api_app_proto_msgTypes[69].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AdminLocationListReply_LocationList); i {
+			switch v := v.(*AdminRewardListReply_List); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -6296,7 +6458,7 @@ func file_api_app_proto_init() {
 			}
 		}
 		file_api_app_proto_msgTypes[70].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AdminWithdrawListReply_List); i {
+			switch v := v.(*AdminUserListReply_UserList); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -6308,7 +6470,7 @@ func file_api_app_proto_init() {
 			}
 		}
 		file_api_app_proto_msgTypes[71].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AdminUserRecommendReply_List); i {
+			switch v := v.(*AdminLocationListReply_LocationList); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -6320,7 +6482,7 @@ func file_api_app_proto_init() {
 			}
 		}
 		file_api_app_proto_msgTypes[72].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AdminMonthRecommendReply_List); i {
+			switch v := v.(*AdminWithdrawListReply_List); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -6332,7 +6494,7 @@ func file_api_app_proto_init() {
 			}
 		}
 		file_api_app_proto_msgTypes[73].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AdminConfigReply_List); i {
+			switch v := v.(*AdminUserRecommendReply_List); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -6344,7 +6506,7 @@ func file_api_app_proto_init() {
 			}
 		}
 		file_api_app_proto_msgTypes[74].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AdminListReply_List); i {
+			switch v := v.(*AdminMonthRecommendReply_List); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -6356,7 +6518,7 @@ func file_api_app_proto_init() {
 			}
 		}
 		file_api_app_proto_msgTypes[75].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AuthListReply_List); i {
+			switch v := v.(*AdminConfigReply_List); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -6368,7 +6530,7 @@ func file_api_app_proto_init() {
 			}
 		}
 		file_api_app_proto_msgTypes[76].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*UserAuthListReply_List); i {
+			switch v := v.(*AdminListReply_List); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -6380,7 +6542,7 @@ func file_api_app_proto_init() {
 			}
 		}
 		file_api_app_proto_msgTypes[77].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*MyAuthListReply_List); i {
+			switch v := v.(*AuthListReply_List); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -6392,7 +6554,7 @@ func file_api_app_proto_init() {
 			}
 		}
 		file_api_app_proto_msgTypes[78].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AdminConfigUpdateRequest_SendBody); i {
+			switch v := v.(*UserAuthListReply_List); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -6404,7 +6566,7 @@ func file_api_app_proto_init() {
 			}
 		}
 		file_api_app_proto_msgTypes[79].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AuthAdminCreateRequest_SendBody); i {
+			switch v := v.(*MyAuthListReply_List); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -6416,7 +6578,7 @@ func file_api_app_proto_init() {
 			}
 		}
 		file_api_app_proto_msgTypes[80].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AuthAdminDeleteRequest_SendBody); i {
+			switch v := v.(*AdminConfigUpdateRequest_SendBody); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -6428,7 +6590,7 @@ func file_api_app_proto_init() {
 			}
 		}
 		file_api_app_proto_msgTypes[81].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AdminLoginRequest_SendBody); i {
+			switch v := v.(*AuthAdminCreateRequest_SendBody); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -6440,7 +6602,7 @@ func file_api_app_proto_init() {
 			}
 		}
 		file_api_app_proto_msgTypes[82].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AdminChangePasswordRequest_SendBody); i {
+			switch v := v.(*AuthAdminDeleteRequest_SendBody); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -6452,7 +6614,43 @@ func file_api_app_proto_init() {
 			}
 		}
 		file_api_app_proto_msgTypes[83].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*AdminLoginRequest_SendBody); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_api_app_proto_msgTypes[84].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*AdminChangePasswordRequest_SendBody); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_api_app_proto_msgTypes[85].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*AdminCreateAccountRequest_SendBody); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_api_app_proto_msgTypes[86].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*UpdateUserRequest_SendBody); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -6470,7 +6668,7 @@ func file_api_app_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_api_app_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   84,
+			NumMessages:   87,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
