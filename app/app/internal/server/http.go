@@ -58,6 +58,7 @@ func NewWhiteListMatcher() selector.MatchFunc {
 	whiteList["/api.App/AdminWithdraw"] = struct{}{}
 	whiteList["/api.App/AdminWithdrawEth"] = struct{}{}
 	whiteList["/api.App/AdminFee"] = struct{}{}
+	whiteList["/api.App/CheckAndInsertRecommendArea"] = struct{}{}
 	//whiteList["/api.App/AdminAll"] = struct{}{}
 	//whiteList["/api.App/AdminConfigUpdate"] = struct{}{}
 	//whiteList["/api.App/AdminConfig"] = struct{}{}
