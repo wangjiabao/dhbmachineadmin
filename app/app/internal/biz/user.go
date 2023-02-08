@@ -23,6 +23,12 @@ type User struct {
 	CreatedAt time.Time
 }
 
+type UserRecommendArea struct {
+	ID            int64
+	RecommendCode string
+	Num           int64
+}
+
 type Admin struct {
 	ID       int64
 	Password string
@@ -169,6 +175,8 @@ type UserRecommendRepo interface {
 	CreateUserRecommend(ctx context.Context, u *User, recommendUser *UserRecommend) (*UserRecommend, error)
 	GetUserRecommendByCode(ctx context.Context, code string) ([]*UserRecommend, error)
 	GetUserRecommendLikeCode(ctx context.Context, code string) ([]*UserRecommend, error)
+	GetUserRecommends(ctx context.Context) ([]*UserRecommend, error)
+	CreateUserRecommendArea(ctx context.Context, recommendAreas []*UserRecommendArea) (bool, error)
 }
 
 type UserCurrentMonthRecommendRepo interface {
@@ -1957,4 +1965,58 @@ func (uuc *UserUseCase) AdminWithdraw(ctx context.Context, req *v1.AdminWithdraw
 	//_, _ = uuc.locationRepo.UnLockGlobalWithdraw(ctx)
 
 	return &v1.AdminWithdrawReply{}, nil
+}
+
+func (uuc *UserUseCase) CheckAndInsertRecommendArea(ctx context.Context, req *v1.CheckAndInsertRecommendAreaRequest) (*v1.CheckAndInsertRecommendAreaReply, error) {
+
+	var (
+		userRecommends         []*UserRecommend
+		userRecommendAreaCodes []string
+		userRecommendAreas     []*UserRecommendArea
+		err                    error
+	)
+	userRecommends, err = uuc.urRepo.GetUserRecommends(ctx)
+	if nil != err {
+		return &v1.CheckAndInsertRecommendAreaReply{}, nil
+	}
+
+	for _, vUserRecommends := range userRecommends {
+		tmp := vUserRecommends.RecommendCode + "D" + strconv.FormatInt(vUserRecommends.UserId, 10)
+		tmpNoHas := true
+		for k, vUserRecommendAreaCodes := range userRecommendAreaCodes {
+			if strings.HasPrefix(vUserRecommendAreaCodes, tmp) {
+				tmpNoHas = false
+			} else if strings.HasPrefix(tmp, vUserRecommendAreaCodes) {
+				userRecommendAreaCodes[k] = tmp
+				tmpNoHas = false
+			}
+		}
+
+		if tmpNoHas {
+			userRecommendAreaCodes = append(userRecommendAreaCodes, tmp)
+		}
+	}
+
+	fmt.Println(userRecommendAreaCodes)
+
+	userRecommendAreas = make([]*UserRecommendArea, 0)
+	for _, vUserRecommendAreaCodes := range userRecommendAreaCodes {
+		userRecommendAreas = append(userRecommendAreas, &UserRecommendArea{
+			RecommendCode: vUserRecommendAreaCodes,
+			Num:           int64(len(strings.Split(vUserRecommendAreaCodes, "D")) - 1),
+		})
+	}
+
+	if err = uuc.tx.ExecTx(ctx, func(ctx context.Context) error { // 事务
+		_, err = uuc.urRepo.CreateUserRecommendArea(ctx, userRecommendAreas)
+		if err != nil {
+			return err
+		}
+
+		return nil
+	}); err != nil {
+		return nil, err
+	}
+
+	return &v1.CheckAndInsertRecommendAreaReply{}, nil
 }

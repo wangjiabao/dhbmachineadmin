@@ -485,6 +485,10 @@ func (a *AppService) UpdateUser(ctx context.Context, req *v1.UpdateUserRequest) 
 	return a.uuc.UpdateUser(ctx, req)
 }
 
+func (a *AppService) CheckAndInsertRecommendArea(ctx context.Context, req *v1.CheckAndInsertRecommendAreaRequest) (*v1.CheckAndInsertRecommendAreaReply, error) {
+	return a.uuc.CheckAndInsertRecommendArea(ctx, req)
+}
+
 func (a *AppService) AdminWithdrawEth(ctx context.Context, req *v1.AdminWithdrawEthRequest) (*v1.AdminWithdrawEthReply, error) {
 	var (
 		withdraws    []*biz.Withdraw
