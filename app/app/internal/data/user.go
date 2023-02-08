@@ -1543,7 +1543,7 @@ func (uc *UserCurrentMonthRecommendRepo) GetUserCurrentMonthRecommendGroupByUser
 	)
 	res := make([]*biz.UserCurrentMonthRecommend, 0)
 
-	instance := uc.data.db.Table("user_current_month_recommend").Group("user_id")
+	instance := uc.data.db.Table("user_current_month_recommend").Group("user_id").Having("count(id) >= 5")
 	if 0 < userId {
 		instance = instance.Where("user_id=?", userId)
 	}
