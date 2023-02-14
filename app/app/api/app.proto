@@ -451,6 +451,7 @@ message AdminAllReply {
 	string allWithdraw = 7;
 	string allReward = 8;
 	string allSystemRewardAndFee = 9;
+	string allWithdrawMonth = 10;
 }
 
 message AdminUserRecommendRequest {

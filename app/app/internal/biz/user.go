@@ -164,6 +164,7 @@ type UserBalanceRepo interface {
 	GetUserBalanceRecordUsdtTotal(ctx context.Context) (int64, error)
 	GetUserBalanceRecordUsdtTotalToday(ctx context.Context) (int64, error)
 	GetUserWithdrawUsdtTotalToday(ctx context.Context) (int64, error)
+	GetUserWithdrawUsdtMonth(ctx context.Context) (int64, error)
 	GetUserWithdrawUsdtTotal(ctx context.Context) (int64, error)
 	GetUserRewardUsdtTotal(ctx context.Context) (int64, error)
 	GetSystemRewardUsdtTotal(ctx context.Context) (int64, error)
@@ -1614,6 +1615,7 @@ func (uuc *UserUseCase) AdminAll(ctx context.Context, req *v1.AdminAllRequest) (
 		userWithdrawUsdtTotalToday      int64
 		userWithdrawUsdtTotal           int64
 		userRewardUsdtTotal             int64
+		userRewardUsdtMonth             int64
 		systemRewardUsdtTotal           int64
 	)
 	userCount, _ = uuc.repo.GetUserCount(ctx)
@@ -1625,6 +1627,7 @@ func (uuc *UserUseCase) AdminAll(ctx context.Context, req *v1.AdminAllRequest) (
 	userWithdrawUsdtTotal, _ = uuc.ubRepo.GetUserWithdrawUsdtTotal(ctx)
 	userRewardUsdtTotal, _ = uuc.ubRepo.GetUserRewardUsdtTotal(ctx)
 	systemRewardUsdtTotal, _ = uuc.ubRepo.GetSystemRewardUsdtTotal(ctx)
+	userRewardUsdtMonth, _ = uuc.ubRepo.GetUserWithdrawUsdtMonth(ctx)
 
 	return &v1.AdminAllReply{
 		TodayTotalUser:        userTodayCount,
@@ -1636,6 +1639,7 @@ func (uuc *UserUseCase) AdminAll(ctx context.Context, req *v1.AdminAllRequest) (
 		AllWithdraw:           fmt.Sprintf("%.2f", float64(userWithdrawUsdtTotal)/float64(10000000000)),
 		AllReward:             fmt.Sprintf("%.2f", float64(userRewardUsdtTotal)/float64(10000000000)),
 		AllSystemRewardAndFee: fmt.Sprintf("%.2f", float64(systemRewardUsdtTotal)/float64(10000000000)),
+		AllWithdrawMonth:      fmt.Sprintf("%.2f", float64(userRewardUsdtMonth)/float64(10000000000)),
 	}, nil
 }
 

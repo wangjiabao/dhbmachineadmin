@@ -1800,6 +1800,38 @@ func (ub UserBalanceRepo) GetUserWithdrawUsdtTotalToday(ctx context.Context) (in
 	return total.Total, nil
 }
 
+// GetUserWithdrawUsdtMonth .
+func (ub UserBalanceRepo) GetUserWithdrawUsdtMonth(ctx context.Context) (int64, error) {
+	var total UserBalanceTotal
+
+	now := time.Now().UTC()
+	var startDate time.Time
+	var endDate time.Time
+	if 8 <= now.Day() {
+		startDate = now
+		endDate = now.AddDate(0, 1, 0)
+	} else {
+		startDate = now.AddDate(0, -1, 0)
+		endDate = now
+	}
+	todayStart := time.Date(startDate.Year(), startDate.Month(), 8, 0, 0, 0, 0, time.UTC)
+	todayEnd := time.Date(endDate.Year(), endDate.Month(), 7, 23, 59, 59, 0, time.UTC)
+
+	if err := ub.data.db.Table("user_balance_record").
+		Where("type=?", "withdraw").
+		Where("coin_type=?", "usdt").
+		Where("created_at>=?", todayStart).Where("created_at<=?", todayEnd).
+		Select("sum(amount) as total").Take(&total).Error; err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return total.Total, errors.NotFound("USER_BALANCE_RECORD_NOT_FOUND", "user balance not found")
+		}
+
+		return total.Total, errors.New(500, "USER BALANCE RECORD ERROR", err.Error())
+	}
+
+	return total.Total, nil
+}
+
 // GetUserWithdrawUsdtTotal .
 func (ub UserBalanceRepo) GetUserWithdrawUsdtTotal(ctx context.Context) (int64, error) {
 	var total UserBalanceTotal
