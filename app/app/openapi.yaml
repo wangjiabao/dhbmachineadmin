@@ -159,13 +159,11 @@ paths:
                 - name: userId
                   in: query
                   schema:
-                    type: integer
-                    format: int64
+                    type: string
                 - name: page
                   in: query
                   schema:
-                    type: integer
-                    format: int64
+                    type: string
             responses:
                 "200":
                     description: OK
@@ -272,8 +270,7 @@ paths:
                 - name: page
                   in: query
                   schema:
-                    type: integer
-                    format: int64
+                    type: string
                 - name: address
                   in: query
                   schema:
@@ -328,8 +325,7 @@ paths:
                 - name: page
                   in: query
                   schema:
-                    type: integer
-                    format: int64
+                    type: string
             responses:
                 "200":
                     description: OK
@@ -370,8 +366,7 @@ paths:
                 - name: page
                   in: query
                   schema:
-                    type: integer
-                    format: int64
+                    type: string
                 - name: address
                   in: query
                   schema:
@@ -422,8 +417,7 @@ paths:
                 - name: adminId
                   in: query
                   schema:
-                    type: integer
-                    format: int64
+                    type: string
             responses:
                 "200":
                     description: OK
@@ -446,8 +440,7 @@ paths:
                 - name: page
                   in: query
                   schema:
-                    type: integer
-                    format: int64
+                    type: string
                 - name: address
                   in: query
                   schema:
@@ -474,8 +467,7 @@ paths:
                 - name: userId
                   in: query
                   schema:
-                    type: integer
-                    format: int64
+                    type: string
             responses:
                 "200":
                     description: OK
@@ -534,8 +526,7 @@ paths:
                 - name: page
                   in: query
                   schema:
-                    type: integer
-                    format: int64
+                    type: string
                 - name: address
                   in: query
                   schema:
@@ -706,11 +697,9 @@ components:
             type: object
             properties:
                 todayTotalUser:
-                    type: integer
-                    format: int64
+                    type: string
                 totalUser:
-                    type: integer
-                    format: int64
+                    type: string
                 allBalance:
                     type: string
                 todayLocation:
@@ -724,6 +713,8 @@ components:
                 allReward:
                     type: string
                 allSystemRewardAndFee:
+                    type: string
+                allWithdrawMonth:
                     type: string
         AdminChangePasswordReply:
             type: object
@@ -743,14 +734,12 @@ components:
                     items:
                         $ref: '#/components/schemas/AdminConfigReply_List'
                 count:
-                    type: integer
-                    format: int64
+                    type: string
         AdminConfigReply_List:
             type: object
             properties:
                 id:
-                    type: integer
-                    format: int64
+                    type: string
                 name:
                     type: string
                 value:
@@ -762,8 +751,7 @@ components:
             type: object
             properties:
                 id:
-                    type: integer
-                    format: int64
+                    type: string
                 value:
                     type: string
         AdminCreateAccountReply:
@@ -790,8 +778,7 @@ components:
             type: object
             properties:
                 id:
-                    type: integer
-                    format: int64
+                    type: string
                 account:
                     type: string
         AdminLocationListReply:
@@ -802,8 +789,7 @@ components:
                     items:
                         $ref: '#/components/schemas/AdminLocationListReply_LocationList'
                 count:
-                    type: integer
-                    format: int64
+                    type: string
         AdminLocationListReply_LocationList:
             type: object
             properties:
@@ -812,16 +798,13 @@ components:
                 address:
                     type: string
                 row:
-                    type: integer
-                    format: int64
+                    type: string
                 col:
-                    type: integer
-                    format: int64
+                    type: string
                 status:
                     type: string
                 currentLevel:
-                    type: integer
-                    format: int64
+                    type: string
                 current:
                     type: string
                 currentMax:
@@ -846,8 +829,7 @@ components:
                     items:
                         $ref: '#/components/schemas/AdminMonthRecommendReply_List'
                 count:
-                    type: integer
-                    format: int64
+                    type: string
         AdminMonthRecommendReply_List:
             type: object
             properties:
@@ -856,8 +838,7 @@ components:
                 recommendAddress:
                     type: string
                 id:
-                    type: integer
-                    format: int64
+                    type: string
                 createdAt:
                     type: string
         AdminRewardListReply:
@@ -868,8 +849,7 @@ components:
                     items:
                         $ref: '#/components/schemas/AdminRewardListReply_List'
                 count:
-                    type: integer
-                    format: int64
+                    type: string
         AdminRewardListReply_List:
             type: object
             properties:
@@ -891,14 +871,12 @@ components:
                     items:
                         $ref: '#/components/schemas/AdminUserListReply_UserList'
                 count:
-                    type: integer
-                    format: int64
+                    type: string
         AdminUserListReply_UserList:
             type: object
             properties:
                 userId:
-                    type: integer
-                    format: int64
+                    type: string
                 createdAt:
                     type: string
                 address:
@@ -908,17 +886,13 @@ components:
                 balanceDhb:
                     type: string
                 vip:
-                    type: integer
-                    format: int64
+                    type: string
                 monthRecommend:
-                    type: integer
-                    format: int64
+                    type: string
                 historyRecommend:
-                    type: integer
-                    format: int64
+                    type: string
                 undo:
-                    type: integer
-                    format: int64
+                    type: string
         AdminUserRecommendReply:
             type: object
             properties:
@@ -930,13 +904,11 @@ components:
             type: object
             properties:
                 userId:
-                    type: integer
-                    format: int64
+                    type: string
                 address:
                     type: string
                 id:
-                    type: integer
-                    format: int64
+                    type: string
                 createdAt:
                     type: string
         AdminWithdrawEthReply:
@@ -950,16 +922,14 @@ components:
                     items:
                         $ref: '#/components/schemas/AdminWithdrawListReply_List'
                 count:
-                    type: integer
-                    format: int64
+                    type: string
         AdminWithdrawListReply_List:
             type: object
             properties:
                 address:
                     type: string
                 id:
-                    type: integer
-                    format: int64
+                    type: string
                 createdAt:
                     type: string
                 amount:
@@ -980,11 +950,9 @@ components:
             type: object
             properties:
                 adminId:
-                    type: integer
-                    format: int64
+                    type: string
                 authId:
-                    type: integer
-                    format: int64
+                    type: string
         AuthAdminDeleteReply:
             type: object
             properties: {}
@@ -992,11 +960,9 @@ components:
             type: object
             properties:
                 adminId:
-                    type: integer
-                    format: int64
+                    type: string
                 authId:
-                    type: integer
-                    format: int64
+                    type: string
         AuthListReply:
             type: object
             properties:
@@ -1008,8 +974,7 @@ components:
             type: object
             properties:
                 id:
-                    type: integer
-                    format: int64
+                    type: string
                 name:
                     type: string
                 path:
@@ -1050,14 +1015,12 @@ components:
                     items:
                         $ref: '#/components/schemas/MyAuthListReply_List'
                 super:
-                    type: integer
-                    format: int64
+                    type: string
         MyAuthListReply_List:
             type: object
             properties:
                 id:
-                    type: integer
-                    format: int64
+                    type: string
                 name:
                     type: string
                 path:
@@ -1135,11 +1098,9 @@ components:
             type: object
             properties:
                 userId:
-                    type: integer
-                    format: int64
+                    type: string
                 undo:
-                    type: integer
-                    format: int64
+                    type: string
         UserAuthListReply:
             type: object
             properties:
@@ -1151,8 +1112,7 @@ components:
             type: object
             properties:
                 id:
-                    type: integer
-                    format: int64
+                    type: string
                 name:
                     type: string
                 path:
@@ -1163,8 +1123,7 @@ components:
                 address:
                     type: string
                 level:
-                    type: integer
-                    format: int64
+                    type: string
                 status:
                     type: string
                 amount:
@@ -1178,24 +1137,19 @@ components:
                 inviteUserAddress:
                     type: string
                 recommendNum:
-                    type: integer
-                    format: int64
+                    type: string
                 recommendTeamNum:
-                    type: integer
-                    format: int64
+                    type: string
                 total:
                     type: string
                 feeTotal:
                     type: string
                 row:
-                    type: integer
-                    format: int64
+                    type: string
                 col:
-                    type: integer
-                    format: int64
+                    type: string
                 currentMonthRecommendNum:
-                    type: integer
-                    format: int64
+                    type: string
                 recommendTotal:
                     type: string
                 locationTotal:
@@ -1213,11 +1167,9 @@ components:
                 account:
                     type: string
                 recommendNumAll:
-                    type: integer
-                    format: int64
+                    type: string
                 recommendTeamAll:
-                    type: integer
-                    format: int64
+                    type: string
                 amountB:
                     type: string
         WithdrawListReply:
